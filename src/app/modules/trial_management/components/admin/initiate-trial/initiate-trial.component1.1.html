@@ -1,0 +1,241 @@
+<div class="tm-group container-fluid">
+  <mat-tab-group class="tm-tab" #trialManagementTab (selectedTabChange)="tabChanged($event)">
+    <!-- TAB 1 -->
+    <mat-tab class="stepA-tab" label="Step A">
+      <section class="container-fluid cmContainer trialBox">
+        <div class="boxWidth">
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label">Choose Sponsor Name </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected>Select</option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="row button-margin buttonRow">
+            <div class="button-padding button-row">
+              <button mat-raised-button class="primary">Save & Next</button>
+              <button mat-raised-button class="primary">Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+    <!-- TAB 2 -->
+    <mat-tab class="stepB-tab" mat-selcted="true" label="Step B">
+      <section class="container-fluid cmContainer trialBox">
+        <div class="boxWidth">
+          <div class="heading col-4">ENTER TRIAL DETAILS
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Trial Title</label>
+            <div class="col-md-4">
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Trial Protocol Number</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row file">
+            <div class="col-md-3 col-form-label">
+              <label for=""> Protocol Document </label>
+            </div>
+            <div class="col-md-4">
+              <input type="file" name="file" ngModel (change)="getFiles($event)">
+            </div>
+            <div class = "prot-File">
+              <button mat-raised-button class="primary">
+                <i class="fa fa-upload" aria-hidden="true"></i>Upload
+              </button>
+            </div>
+            
+              <label class="col-md-2 col-form-label"> Version </label>
+            <div class="col-md-3">
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Regulatory Body </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected>Health and Safety Authority</option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Therapeutic Area </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected> </option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Disease Name</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Type of Molecule </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected> </option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Design of Trial </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected> </option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+
+            <label class="col-md-2 col-form-label"> Trial Subsection </label>
+            <div class="col-md-3">
+              <select class="custom-select dropBox">
+                <option selected> </option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+            </div>
+         
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Phases of Trail </label>
+            <div class="col-md-9">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="inlineRadioOptions"  type="radio" id="inlineradio1" value="option1">
+              <label class="form-check-label" for="inlineradio1">Phase 1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="inlineRadioOptions"  type="radio" id="inlineradio2" value="option2">
+              <label class="form-check-label" for="inlineradio2">Phase 2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="inlineRadioOptions"  type="radio" id="inlineradio3" value="option3">
+              <label class="form-check-label" for="inlineradio3">Phase 3</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="inlineRadioOptions"  type="radio" id="inlineradio4" value="option4">
+              <label class="form-check-label" for="inlineradio4">Phase 4</label>
+            </div>
+          </div>
+        </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label">Car Service Partner </label>
+            <div class="col-md-4">
+              <button mat-raised-button disabled class="primary">
+                Connect To 3rd Party Service
+              </button>
+            </div>
+          </div>
+          <div class="row button-margin trialButton">
+            <div class="button-padding button-row">
+              <button mat-raised-button class="primary">Save & Next</button>
+              <button mat-raised-button class="primary">Back</button>
+              <button mat-raised-button class="primary">Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+    <!-- TAB 3 -->
+    <mat-tab class="stepC-tab" mat-selcted="true" label="Step C">
+      <section class="container-fluid cmContainer trialBox">
+        <div class="boxWidth">
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label">Select Regions </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected>APAC</option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label">Select Countries </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected>USA</option>
+                <option value="1">Japan</option>
+                <option value="2">Europe</option>
+              </select>
+            </div>
+          </div>
+          <div class="row button-margin buttonRow">
+            <div class="button-padding button-row">
+              <button mat-raised-button class="primary">Save & Next</button>
+              <button mat-raised-button class="primary">Back</button>
+              <button mat-raised-button class="primary">Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+    <!-- TAB 4 -->
+    <mat-tab class="stepD-tab" mat-selcted="true" label="Step D">
+      <section class="container-fluid cmContainer trialBox">
+        <div class="boxWidth">
+            <div class="heading col-4">ASSIGN CRO
+              </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label">CRO ID </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected></option>
+                <option value="1">Johnson and Johnson</option>
+                <option value="2">Takeda</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label">CRO Name </label>
+            <div class="col-md-4">
+              <select class="custom-select dropBox">
+                <option selected></option>
+                <option value="1">Japan</option>
+                <option value="2">Europe</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-4 col-form-label">Regulatory Body </label>
+              <div class="col-md-4">
+                <select class="custom-select dropBox">
+                  <option selected></option>
+                  <option value="1">Japan</option>
+                  <option value="2">Europe</option>
+                </select>
+              </div>
+            </div>
+          <div class="row button-margin buttonRow">
+            <div class="button-padding button-row">
+              <button mat-raised-button class="primary">Save & Next</button>
+              <button mat-raised-button class="primary">Back</button>
+              <button mat-raised-button class="primary">Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+    <mat-tab class="stepE-tab" mat-selcted="true" label="Step E">
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

@@ -1,0 +1,280 @@
+<section id="page" class="pageBackground">
+  <aside id="pageAside"  #pageAside [ngClass]="{'closeAside': toggleleftMenu}" class="pageAside" *ngIf="(sectionName !== 'dashboard')">
+    <!-- left Menu navParent -->
+    <nav class="navParent">
+      <ul>
+        <li>
+          <a (click)="onToggleSubMenu('dashboard');">
+            <img title="Dashboard" [src]=" (sectionName !== 'dashboard') ? './assets/img/icons/dashboard.svg' :'./assets/img/icons/dashboard-on.svg' "
+              alt="Dashboard">
+          </a>
+        </li>
+        <li *ngIf="role !== constants.sponsorId">
+          <a (click)="onToggleSubMenu('userManagement');">
+            <img title="User Management" [src]="(sectionName !== 'userManagement') ? './assets/img/icons/user_2.svg' : './assets/img/icons/user-on.svg'"
+              alt="User Management">
+          </a>
+        </li>
+        <li *ngIf="role=== constants.adminId">
+          <a (click)="onToggleSubMenu( 'trialManagement');">
+            <img title="Trial Management" [src]="(sectionName !== 'trialManagement') ? './assets/img/icons/trial.svg' : './assets/img/icons/trial-on.svg'"
+              alt="Trial Management">
+          </a>
+        </li>
+        <li *ngIf="role !== constants.superAdminId">
+          <a (click)="onToggleSubMenu('contentManagement');">
+            <img title="Content Management" [src]="(sectionName !== 'contentManagement') ? './assets/img/icons/content.svg' : './assets/img/icons/content-on.svg'"
+              alt="Content Management">
+          </a>
+        </li>
+        <li>
+          <a (click)="onToggleSubMenu('analytics');">
+            <img title="Data Analytics" [src]="(sectionName !== 'analytics')? './assets/img/icons/analytics.svg' : './assets/img/icons/analytics-on.svg'"
+              alt="Data Analytics">
+          </a>
+        </li>
+
+        <li *ngIf="role === constants.adminId">
+          <a (click)="onToggleSubMenu('machineLearning');">
+            <img title="Machine Learning" [src]="(sectionName !== 'machineLearning') ? './assets/img/icons/machine-off.svg' :'./assets/img/icons/machine-on.svg'"
+              alt="Data Analytics">
+          </a>
+        </li>
+
+        <!-- <li class="settingBottom" (click)="onToggleSubMenu('settings');" >
+          <a href="javascript:void(0)">
+            <i title="Setting" class="fa fa-2x fa-cog" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="logoutBottom">
+          <a href="javascript:void(0)" (click)="onLogout()">
+            <i title="Logout" class="fa fa-2x fa-power-off" aria-hidden="true"></i>
+          </a>
+        </li> -->
+      </ul>
+    </nav>
+
+    <!-- left Menu navChild -->
+    <nav class="navChild" [ngClass]="{'openLefMenu': toggleleftMenu}">
+      <div id="leftNavMenu" class="leftNavMenu">
+        <img class="logo" src="./assets/img/logo.png" alt="">
+        <ul class="list-group menu">
+
+          <!-- User Management menu -->
+          <ng-container *ngIf=" (role=== constants.adminId || role === constants.superAdminId || role === constants.croId 
+          ||  role === constants.piId ||  role === constants.sitesId)  && sectionName === 'userManagement'">
+
+            <ul class="submenu">
+              <li *ngIf="role === constants.superAdminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('admin')">
+
+                  Admin
+                </a>
+              </li>
+              <li *ngIf="role === constants.superAdminId || role=== constants.adminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('sponsor')">
+
+                  Sponsor
+                </a>
+              </li>
+
+              <li *ngIf=" role=== constants.adminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('cro')">
+
+                  CRO
+                </a>
+              </li>
+              <!-- <li *ngIf=" role=== constants.adminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('pi')">
+
+                  PI
+                </a>
+              </li> -->
+
+              <li *ngIf=" role=== constants.adminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('siteCoordinator')">
+                  Site
+                </a>
+              </li>
+              <li *ngIf="role=== constants.adminId" class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('irb')">
+                  IRB
+                </a>
+              </li>
+              <li *ngIf="role === constants.sitesId || role === constants.croId || role === constants.piId " class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('allSubjects')">
+
+                  All Subjects
+                </a>
+              </li>
+              <li *ngIf="role === constants.croId || role === constants.piId " class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('identified')">
+
+                  Identified
+                </a>
+              </li>
+              <li *ngIf="role === constants.sitesId || role === constants.croId || role === constants.piId " class="list-group-item sub_group"
+                routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('qualified')">
+
+                  Qualified
+                </a>
+              </li>
+              <li *ngIf="role === constants.sitesId || role === constants.croId || role === constants.piId " class="list-group-item sub_group"
+                routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('preConsented')">
+
+                  Interest Expressed
+                </a>
+              </li>
+              <li *ngIf="role === constants.sitesId || role === constants.croId || role === constants.piId " class="list-group-item sub_group"
+                routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('consented')">
+
+                  Consented
+                </a>
+              </li>
+
+            </ul>
+            <!-- User Management menu end -->
+          </ng-container>
+          <!--  Trial Management Menu  -->
+          <ng-container *ngIf=" role === constants.adminId && sectionName === 'machineLearning'">
+
+            <ul class="submenu">
+              <li class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('machineLearning')">
+                  Informed Consent
+                </a>
+              </li>
+            </ul>
+            <!-- User Management menu end -->
+          </ng-container>
+          <!-- Content Management-->
+          <ng-container *ngIf=" (role=== constants.adminId  || role === constants.croId ||  role === constants.piId ||  role === constants.sitesId 
+          ||  role === constants.sponsorId || role ===  constants.superAdminId)  && sectionName === 'contentManagement'">
+            <ul class="submenu">
+              <li class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('allDocs')">
+                  All Documents
+                </a>
+              </li>
+              <li class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('icfOfficial')">
+                  ICF Official
+                </a>
+              </li>
+              <li class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('icfExplanatory')">
+                  ICF Explanatory
+                </a>
+              </li>
+              <li class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('invitationLetter')">
+                  Invitation Letter
+                </a>
+              </li>
+              <li class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('studyDescription')">
+                  Study Description
+                </a>
+              </li>
+              <li class="list-group-item sub_group" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('faqs')">
+                  FAQs
+                </a>
+              </li>
+              <li class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToDocuments('videos')">
+                  Video
+                </a>
+              </li>
+              <li *ngIf="role ===  constants.superAdminId" class="list-group-item" routerLinkActive="activerout">
+                <a routerLink="/contentManagement/documents">
+
+                  Documents
+                </a>
+              </li>
+              <!-- <li *ngIf="role === 'cro'" class="list-group-item" routerLinkActive="activerout">
+                <a routerLink="/contentManagement/viewPatients">
+                  
+                  View Patients
+                </a>
+              </li>
+              <li *ngIf="role === 'cro'" class="list-group-item" routerLinkActive="activerout">
+                <a routerLink="/contentManagement/viewTrialDocuments">
+                  
+                  View Trial Documents
+                </a>
+              </li> -->
+              <!-- <li *ngIf="role === 'sponsor'" class="list-group-item" routerLinkActive="activerout">
+                <a routerLink="/contentManagement/videos">
+                  
+                  Videos
+                </a>
+              </li> -->
+            </ul>
+            <!-- User Management menu end -->
+          </ng-container>
+
+        </ul>
+      </div>
+    </nav>
+    <!--==== left Menu end======-->
+  </aside>
+
+  <!-- =========================================================================================================== -->
+
+  <article id = "pageContainer" [ngClass]="{'pushPageContainer': toggleleftMenu}" class="pageContainer" >
+    <!-- header -->
+    <header>
+      <mat-toolbar>
+        <mat-toolbar-row class="headerBottomBorder">
+          <div *ngIf = "sectionName !== 'dashboard'">
+            <img class="toggleMenuBtn" (click)="onToggleLeftMenu();" src="./assets/img/icons/menu.svg" alt="">
+
+            <div id="trial" class="trialName">{{trialName}}</div>
+            <div id="breadcrum" class="bredcrum">> {{ breadCrum}}</div>
+          </div>
+          <div class="date bredcrum dateStyleBread" *ngIf = "sectionName === 'dashboard'">
+            {{today | date:'EEEE, dd MMMM yyyy'}}
+          </div>
+          <span class="tm_spacer"></span>
+          <div class="headerRightContent">
+            <div class="col">
+              <div ngbDropdown class="d-inline-block row">
+                <a href="javascript:void(0);" class="" id="userdropdown" ngbDropdownToggle>
+                
+                  <span class="user-welcome" mat-button> Welcome, {{user}}</span>
+                   
+                 
+                    <img class="userProfileImg" src="./assets/img/icons/user.svg" alt="">
+                  
+                </a>
+                <span class="user-notification">
+                  <!-- <a routerLink="/contentManagement/notifications"> -->
+                  <img class="notification" src="./assets/img/icons/notification.svg" alt="">
+
+                </span>
+                <div class="userDropwdown" ngbDropdownMenu aria-labelledby="userdropdown">
+                  <!-- <a href="javascript:void(0);" class="dropdown-item" (click)="onToggleSubMenu('settings');">Settings</a> -->
+                  <a href="javascript:void(0);" class="dropdown-item" (click)="onLogout();"> Logout </a>
+                </div>
+              </div>
+              <span class="roleStyle row ">{{userRole}} </span>
+            </div>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </header>
+    <!-- header end-->
+
+    <!-- ==================================================================================================== -->
+
+    <!-- page content start -->
+    <div class="mainContainer">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- page content end -->
+  </article>
+</section>

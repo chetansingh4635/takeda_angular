@@ -1,0 +1,813 @@
+<section class="greybg">
+  <div class="greybgContainer itpContainer">
+    <form [formGroup]="form" novalidate>
+      <ngb-tabset #t="ngbTabset" type="pills">
+
+        <ngb-tab id="trialDetails">
+          <ng-template ngbTabTitle> Trial Details </ng-template>
+          <ng-template ngbTabContent>
+            <div class="dialog-form trialDetailsStyle" formGroupName="trialDetails">
+              <p class="formHeading">Sponsor Name</p>
+              <div class="formField">
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].sponsorName.errors?.required && form['controls'].trialDetails['controls'].sponsorName.touched )  || (form['controls'].trialDetails['controls'].sponsorName.errors?.required && submitted)}">
+                  <label for="sname"> Choose Sponsor Name </label>
+                  <select class="form-control arrowRight" formControlName="sponsorName" untouched>
+                    <option *ngIf ="!(form['controls'].trialDetails['controls'].sponsorName.value)" class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Sponsor Name</option>
+                    <option *ngFor="let sponsor of sponsorNameList" [value]="sponsor.orgName">{{sponsor.orgName}}</option>
+                  </select>
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].sponsorName.errors?.required && form['controls'].trialDetails['controls'].sponsorName.touched )  || (form['controls'].trialDetails['controls'].sponsorName.errors?.required && submitted)">
+                  *Please select valid Sponsor Name
+                </span>
+              </div>
+
+              <p class="formHeading">Trial Details</p>
+              <div class="formField">
+                  <div class="form-group col" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialName.errors?.required && form['controls'].trialDetails['controls'].trialName.touched )  || (form['controls'].trialDetails['controls'].trialName.errors?.required && submitted)}">
+                      <label for="trialName">Trial Name</label>
+                      <input type="text" class="form-control" formControlName="trialName" placeholder="Enter Trial Name">
+                    </div>
+                    <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialName.errors?.required && form['controls'].trialDetails['controls'].trialName.touched )  || (form['controls'].trialDetails['controls'].trialName.errors?.required && submitted)">
+                      *Please enter valid Trial Name
+                    </span>
+
+                <div class="form-group col" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialTitle.errors?.required && form['controls'].trialDetails['controls'].trialTitle.touched )  || (form['controls'].trialDetails['controls'].trialTitle.errors?.required && submitted)}">
+                  <label for="trialTitle">Trial Title</label>
+                  <input type="text" class="form-control" formControlName="trialTitle" placeholder="Enter Trial Title">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialTitle.errors?.required && form['controls'].trialDetails['controls'].trialTitle.touched )  || (form['controls'].trialDetails['controls'].trialTitle.errors?.required && submitted)">
+                  *Please enter valid Trial Title
+                </span>
+
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && form['controls'].trialDetails['controls'].trialProtocolNumber.touched )  || (form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && submitted)}">
+                  <label for="trialProtocolNumber">Trial Protocol Number</label>
+                  <input type="text" class="form-control" formControlName="trialProtocolNumber" placeholder="Enter Trial Protocol Number">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && form['controls'].trialDetails['controls'].trialProtocolNumber.touched )  || (form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && submitted)">
+                  *Please enter valid Trial Protocol Number
+                </span>
+                <div class="row col">
+                  <div class="form-group col-6">
+                    <label for="choosefile"> Protocol Document</label>
+
+                    <label for="file-upload" class="custom-file-upload" [ngClass]="{'isInvalidSpecial' :(!files.length && form['controls'].trialDetails['controls'].protocolDocument.touched )  || (!files.length && submitted) || fileErrors}">
+                      <img class="file-upload " src="./assets/img/icons/upload.svg" alt="file-upload">{{files.length ? files[0].name : ('Choose File')}}
+                    </label>
+                    <input type="file" class="form-control" id="file-upload" formControlName="protocolDocument" (change)=onFileChange($event)
+                      placeholder="Choose File">
+                    <span class="row input-padding error-message differentError1" *ngIf="(!files.length && form['controls'].trialDetails['controls'].protocolDocument.touched )  || (!files.length && submitted )">
+                      *Please select valid  Protocol Document
+                    </span>
+                    <span class="row input-padding error-message differentError1" *ngIf="(fileErrors)">
+                      *Please select valid Docx Protocol Document
+                    </span>
+                  </div>
+                  <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].version.errors?.required && form['controls'].trialDetails['controls'].version.touched )  || (form['controls'].trialDetails['controls'].version.errors?.required && submitted)}">
+                    <label for="version"> Version </label>
+                    <input type="number" class="form-control" formControlName="version" placeholder="Enter Version">
+
+                    <span class="row input-padding error-message differentError" *ngIf="(form['controls'].trialDetails['controls'].version.errors?.required && form['controls'].trialDetails['controls'].version.touched )  || (form['controls'].trialDetails['controls'].version.errors?.required && submitted)">
+                      *Please select valid Version
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && form['controls'].trialDetails['controls'].regulatoryBody.touched )  || (form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && submitted)}">
+                  <label for="regulatoryBody">Regulatory Body</label>
+                  <select class="form-control arrowRight" formControlName="regulatoryBody" untouched>
+                    <option  class="PlaceholderOption" *ngIf ="!(form['controls'].trialDetails['controls'].regulatoryBody.value)" value="" [selected]="true" [hidden]="true">Select IRB Name</option>
+                    <option *ngFor="let irb of irbList" [value]="irb.irbName">{{irb.irbName}}</option>
+                  </select>
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && form['controls'].trialDetails['controls'].regulatoryBody.touched )  || (form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && submitted)">
+                  *Please enter valid Regulatory Body
+                </span>
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && form['controls'].trialDetails['controls'].therapeuticArea.touched )  || (form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && submitted)}">
+                  <label for="therapeuticArea">Therapeutic Area</label>
+                  <input type="text" class="form-control" formControlName="therapeuticArea" placeholder="Enter Therapeutic Area">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && form['controls'].trialDetails['controls'].therapeuticArea.touched )  || (form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && submitted)">
+                  *Please enter valid Therapeutic Area
+                </span>
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].diseaseName.errors?.required && form['controls'].trialDetails['controls'].diseaseName.touched )  || (form['controls'].trialDetails['controls'].diseaseName.errors?.required && submitted)}">
+                  <label for="diseaseName">Disease Name</label>
+                  <input type="text" class="form-control" formControlName="diseaseName" placeholder="Enter Disease Name">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].diseaseName.errors?.required && form['controls'].trialDetails['controls'].diseaseName.touched )  || (form['controls'].trialDetails['controls'].diseaseName.errors?.required && submitted)">
+                  *Please enter valid Disease Name
+                </span>
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && form['controls'].trialDetails['controls'].typeOfMolecule.touched )  || (form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && submitted)}">
+                  <label for="typeOfMolecule">Type of Molecules</label>
+                  <input type="text" class="form-control" formControlName="typeOfMolecule" placeholder="Enter Type of Molecules">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && form['controls'].trialDetails['controls'].typeOfMolecule.touched )  || (form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && submitted)">
+                  *Please enter valid Type of Molecule
+                </span>
+                <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].designOfTrial.errors?.required && form['controls'].trialDetails['controls'].designOfTrial.touched )  || (form['controls'].trialDetails['controls'].designOfTrial.errors?.required && submitted)}">
+                  <label for="designOfTrial">Design of Trial</label>
+                  <input type="text" class="form-control" formControlName="designOfTrial" placeholder="Enter Design of Trial">
+                </div>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].designOfTrial.errors?.required && form['controls'].trialDetails['controls'].designOfTrial.touched )  || (form['controls'].trialDetails['controls'].designOfTrial.errors?.required && submitted)">
+                  *Please enter Valid Design of Trial
+                </span>
+                <div class="form-group col-6">
+                  <label for="phase">Phase of Trial</label>
+                </div>
+                <div class="form-group col-6 phases">
+                  <div formArrayName="phaseOfTrial" *ngFor="let item of form.controls['trialDetails'].get('phaseOfTrial').controls; let i = index;">
+                    <div [formGroupName]="i">
+                      <mat-checkbox formControlName="phase" [value]="phases[i].value" (change)="setPhase()"> </mat-checkbox>
+                      <span class="">{{phases[i].value}}</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="row input-padding error-message" *ngIf="(!phasesName.length && submitted)">
+                  *Please select valid phase
+                </span>
+              </div>
+              <p class="formHeading">Geography Region</p>
+              <div class="row">
+
+                <div class="col-6" formArrayName="geographyRegion" *ngFor="let item of form.controls['trialDetails'].get('geographyRegion').controls; let i = index;">
+                  <div [formGroupName]="i">
+                    <div class="form-group formField viewForm">
+                      <label for="Region"> Select Region </label>
+                      <select  formControlName="region" class="form-control ">
+                        <option *ngFor="let region of regionList" [value]="region.regionName">{{region.regionName}}</option>
+                      </select>
+
+                      <label for="country"> Select Country </label>
+                      <select  formControlName="country"    class="form-control ">
+                        <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
+                      </select>
+                    </div>
+                    <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].geographyRegion.invalid && submitted)">
+                      *Please select valid Region
+                    </span>
+                  </div>
+                </div>
+                <div class="col-6 " *ngIf="isAddTrial">
+                  
+                  <div class="form-group  formField cardSaveForm viewForm">
+                      <img (click)="isAddTrial=false;addRegionError=undefined;" class="cancel-icon" src="./assets/img/icons/close-button-file.svg" alt="">
+                    <label for="region"> Select Region </label>
+                    <select  formControlName="region" class="  form-control " (change)="selectCountry($event)">
+                      <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Region </option>
+                      <option *ngFor="let region of regionList" [value]="region.regionName">{{region.regionName}}</option>
+                    </select>
+
+                    <label for="country"> Select Country </label>
+                    <div class="saveClass ">
+                      <select formControlName="country"   class=" form-control col-10 ">
+                        <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Countries </option>
+                        <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
+                      </select>
+                      <button class="btn btn-primary" (click)="saveRegion()">Save</button>
+                    </div>
+                    <span class=" row input-padding  error-message">{{addRegionError}}</span>
+                  </div>
+                </div>
+                <div class="col-6 " *ngIf="!isAddTrial">
+                  <div class="form-group location" (click)="isAddTrial = true">
+                    <div class="location-image">
+                      <img src="./assets/img/icons/placeholder.svg" />
+                      <p class="new-region-text"> + Add New Region</p>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="row error-message mt" *ngIf="!regions.length && submitted">
+                <span>*Please Add a Region</span>
+              </div>
+
+              <div class="text-center saveButton">
+                <button class="btn btn-primary btnNext" (click)="valiDateForm('trialDetails')"> Next </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <!-------------------------------- Site Management ------------------------------------------------------------ -->
+      
+
+        <!---------------------------------------------Table of task ------------------------------------------------------------------>
+        <ngb-tab id="tableofTask" [disabled]="isTableOfTask">
+          <ng-template ngbTabTitle> Table of Task </ng-template>
+          <ng-template ngbTabContent>
+            <div class="row tableOfTask">
+              <div class="col-6">
+
+                <mat-card *ngFor="let procedure of visitProcedures; let i=index;">
+                  <mat-card-subtitle class="taskLabel">Visit Procedure No. {{i+1}}
+                    <!-- <i class="fa fa-pencil" aria-hidden="true" *ngIf="!isProcedureEdit || updateIndexProcedure !== i" (click)="isProcedureEdit = true;updateIndexProcedure = i; form['controls'].tableOfTasks['controls'].description.setValue(procedure.description)"></i> -->
+                    <img (click)="isProcedureEdit = true;updateIndexProcedure = i;addProcedureSubmitted=false; form['controls'].tableOfTasks['controls'].procedureDescription.setValue(procedure);"
+                      *ngIf="!isProcedureEdit || updateIndexProcedure !== i" class="cancel-icon" src="./assets/img/icons/edit.svg"
+                      alt="">
+
+                    <!-- <i class="" aria-hidden="true" *ngIf="isProcedureEdit && updateIndexProcedure === i" (click)="isProcedureEdit = false;">cancel</i> -->
+                    <img (click)="isProcedureEdit = false" *ngIf="isProcedureEdit && updateIndexProcedure === i" class="cancel-icon" src="./assets/img/icons/close-button-file.svg"
+                      alt="">
+                  </mat-card-subtitle>
+                  {{ !(isProcedureEdit && updateIndexProcedure === i) ? procedure : ''}}
+                  <div formGroupName="tableOfTasks" *ngIf="isProcedureEdit && updateIndexProcedure === i ">
+                    <textarea class="taskInput" formControlName="procedureDescription"></textarea>
+                    <button class="btn btn-primary row tableButton" (click)="editProcedure(i)"> Save </button>
+                  </div>
+                </mat-card>
+
+                <mat-card *ngIf="isAddProcedure">
+                  <mat-card-subtitle class="taskLabel">Visit Procedure No. {{visitProcedures.length +1}}
+                    <!-- <i class="fa" aria-hidden="true" (click)="isAddProcedure = false;"> cancel</i> -->
+                    <img (click)="isAddProcedure = false" class="cancel-icon" src="./assets/img/icons/close-button-file.svg" alt="">
+                  </mat-card-subtitle>
+                  <div formGroupName="tableOfTasks">
+                    <textarea class="taskInput" formControlName="procedureDescription"></textarea>
+                   
+                    <button class="btn btn-primary  row tableButton" (click)="addProcedure()"> Save </button>
+                    <span class="row input-padding error-message" *ngIf="(addProcedureSubmitted && form['controls'].tableOfTasks['controls'].procedureDescription.errors?.required )">
+                      *Please Enter Valid Description
+                    </span>
+                  </div>
+                </mat-card>
+               
+
+                <mat-card class="form-group location visitProcedure" *ngIf="!isAddProcedure" (click)="isAddProcedure = true;form['controls'].tableOfTasks['controls'].procedureDescription.setValue('')">
+
+                  <div class="location-image">
+                    <img src="./assets/img/icons/placeholder-2.svg" />
+                    <p class="new-region-text"> + Add Visit Procedure</p>
+                  </div>
+
+                </mat-card>
+                <!-- <span class="row input-padding error-message" *ngIf="(!visitProcedures.length && submitted)">
+                  *Please Enter Minimum one Visit Procedure
+                </span> -->
+
+              </div>
+              <div class="col-6">
+                <mat-card *ngFor="let procedure of visitTreatments; let i=index;">
+                  <mat-card-subtitle class="taskLabel">Visit Treatments No. {{i+1}} 
+                    <!-- <i class="fa fa-pencil" aria-hidden="true" *ngIf="!isTreatmentEdit || updateIndexTreatment !== i" (click)="isTreatmentEdit = true;updateIndexTreatment = i; form['controls'].tableOfTasks['controls'].description.setValue(procedure.description)"></i> -->
+
+                    <img (click)="isTreatmentEdit = true;updateIndexTreatment = i; addTreatmentSubmitted=false;form['controls'].tableOfTasks['controls'].treatmentDescription.setValue(procedure);"
+                      *ngIf="!isTreatmentEdit || updateIndexTreatment !== i" class="cancel-icon" src="./assets/img/icons/edit.svg"
+                      alt="">
+
+                    <!-- <i class="" aria-hidden="true" *ngIf="isTreatmentEdit && updateIndexTreatment === i" (click)="isTreatmentEdit = false;">cancel</i> -->
+                    <img (click)="isTreatmentEdit = false" *ngIf="isTreatmentEdit && updateIndexTreatment === i" class="cancel-icon" src="./assets/img/icons/close-button-file.svg"
+                      alt="">
+                  </mat-card-subtitle>
+                  {{ !(isTreatmentEdit && updateIndexTreatment === i) ? procedure : ''}}
+                  <div formGroupName="tableOfTasks" *ngIf="isTreatmentEdit && updateIndexTreatment === i ">
+                    <textarea class="taskInput" formControlName="treatmentDescription"></textarea>
+                    <button class="btn btn-primary row tableButton" (click)="editTreatment(i)"> Save </button>
+                  </div>
+                </mat-card>
+
+                <mat-card *ngIf="isAddTreatment">
+                  <mat-card-subtitle class="taskLabel">Visit Treatments No. {{visitTreatments.length +1}}
+                    <!-- <i class="fa" aria-hidden="true" (click)="isAddTreatment = false;"> cancel</i> -->
+                    <img (click)="isAddTreatment = false" class="cancel-icon" src="./assets/img/icons/close-button-file.svg" alt="">
+
+                  </mat-card-subtitle>
+                  <div formGroupName="tableOfTasks">
+                    <textarea class="taskInput" formControlName="treatmentDescription"></textarea>
+                   
+                    <button class="btn btn-primary row tableButton" (click)="addTreatment()"> Save </button>
+                    <span class="row input-padding error-message" *ngIf="(addTreatmentSubmitted && form['controls'].tableOfTasks['controls'].treatmentDescription.errors?.required )">
+                      *Please Enter Valid Description
+                    </span>
+                  </div>
+                </mat-card>
+
+                <mat-card *ngIf="!isAddTreatment" class="form-group location visitProcedure" (click)="isAddTreatment = true;form['controls'].tableOfTasks['controls'].treatmentDescription.setValue('')">
+                  <div class="location-image">
+                    <img src="./assets/img/icons/placeholder-2.svg" />
+                    <p class="new-region-text"> + Add Visit Treatment</p>
+                  </div>
+                </mat-card>
+                <!-- <span class="row input-padding error-message" *ngIf="(!visitTreatments.length && submitted)">
+                  *Please Enter Minimum one Visit Treatment
+                </span> -->
+              </div>
+            </div>
+            <div class="text-center saveButton">
+              <button class="btn btnPrev" (click)="t.select('trialDetails')"> Previous </button>
+              <button class="btn btn-primary btnNext" (click)="valiDateForm('tableOfTask')"> Next </button>
+            </div>
+          </ng-template>
+        </ngb-tab>
+
+        <!-------------------------------  Visits for Protocol ------------------------------------------------------>
+        <ngb-tab id="visitsofProtocol" [disabled]="isVisitsProtocol">
+          <ng-template ngbTabTitle> Visits for Protocol </ng-template>
+          <ng-template ngbTabContent>
+            <div class="row visitsofProtocol" formGroupName="visitsOfProtocol">
+              <div class="col-6" formArrayName="visitsOfProtocol" *ngFor="let item of form.controls['visitsOfProtocol'].get('visitsOfProtocol').controls; let i = index;">
+                <div [formGroupName]="i">
+                  <p class="formHeading">Visit No. {{i+1}}</p>
+                  <div class="formField">
+                    <div class="form-group">
+                      <label for="sname">Visit Type </label>
+                      <select   formControlName="visitType" class="form-control">
+
+                        <option *ngFor="let visit of visitTypeList" [value]="visit.visitName">{{visit.visitName}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitType.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitType.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitType.errors?.required)">
+                        *Please Select valid Visit Type
+                      </span>
+
+                      <label for="sname">Visit Procedure </label>
+                      <select    formControlName="visitProcedure" class="form-control">
+
+                        <option *ngFor="let procedure of visitProcedures" [value]="procedure">{{procedure}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitProcedure.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitProcedure.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitProcedure.errors?.required)">
+                        *Please Select valid Visit Procedure
+                      </span>
+                      <label for="sname"> Visit Treatment </label>
+                      <select   formControlName="visitTreatMent" class="form-control">
+
+                        <option *ngFor="let treatment of visitTreatments" [value]="treatment">{{treatment}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitTreatMent.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitTreatMent.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitTreatMent.errors?.required)">
+                        *Please Select valid Visit Treatment
+                      </span>
+                      <div class="row">
+                        <div class="col">
+                          <label for="sname"> Visit Window </label>
+                          <select   formControlName="visitWindow" class="form-control">
+
+                            <option *ngFor="let window of visitWindow" [value]="window">{{window}}</option>
+                          </select>
+                          <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.errors?.required)">
+                            *Please Select valid Visit Window
+                          </span>
+                        </div>
+                        <div class="col" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.errors?.required) || 
+                        (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.errors?.required)}">
+                          <label for="sname"> Start {{form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.value}}
+                          </label>
+                          <input type="number" class="form-control" formControlName="startWeek" placeholder="Enter Start" (keyup)="restrictData($event)">
+                          <span class="row input-padding error-message inputError" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].startWeek.errors?.required)">
+                            *Please Enter Valid Start {{form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.value}}
+                          </span>
+                        </div>
+                        <div class="col" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.errors?.required) || 
+                        (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.errors?.required)}">
+                          <label for="sname"> End {{form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.value}}
+                          </label>
+                          <input type="number" class="form-control" formControlName="endWeek" placeholder="Enter End" (keyup)="restrictData($event)">
+                          <span class="row input-padding error-message inputError" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.touched && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].endWeek.errors?.required)">
+                            *Please Enter Valid End {{form['controls'].visitsOfProtocol['controls'].visitsOfProtocol['controls'][i]['controls'].visitWindow.value}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6" *ngIf="isAddProtocol">
+              <div class="formField">
+                  <img (click)="isAddProtocol=false;submitted=false;" class="cancel-icon mt-2" src="./assets/img/icons/close-button-file.svg" alt="">
+                  <p class="formHeading">Set Visit No. {{visitsProtocols.length + 1}}</p>
+                  <div class="form-group">
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitType.touched && form['controls'].visitsOfProtocol['controls'].visitType.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitType.errors?.required)}">
+                      <label for="sname">Visit Type </label>
+                      <select   formControlName="visitType" class="form-control">
+                        <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true"> Select Visit Type </option>
+                        <option *ngFor="let visit of visitTypeList" [value]="visit.visitName">{{visit.visitName}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitType.touched && form['controls'].visitsOfProtocol['controls'].visitType.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitType.errors?.required)">
+                        *Please Select valid Visit Type
+                      </span>
+                    </div>
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitProcedure.touched && form['controls'].visitsOfProtocol['controls'].visitProcedure.errors?.required) || 
+                    (submitted && form['controls'].visitsOfProtocol['controls'].visitProcedure.errors?.required)}">
+                      <label for="sname"> Visit Procedure </label>
+                      <select    formControlName="visitProcedure" class="form-control">
+                        <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true"> Select Visit Procedure </option>
+                        <option *ngFor="let procedure of visitProcedures" [value]="procedure">{{procedure}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitProcedure.touched && form['controls'].visitsOfProtocol['controls'].visitProcedure.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitProcedure.errors?.required)">
+                        *Please Select valid Visit Procedure
+                      </span>
+                    </div>
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitTreatMent.touched && form['controls'].visitsOfProtocol['controls'].visitTreatMent.errors?.required) || 
+                    (submitted && form['controls'].visitsOfProtocol['controls'].visitTreatMent.errors?.required)}">
+                      <label for="sname"> Visit Treatment </label>
+                      <select   formControlName="visitTreatMent" class="form-control">
+                        <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true"> Select Visit Treatment </option>
+                        <option *ngFor="let treatment of visitTreatments" [value]="treatment">{{treatment}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitTreatMent.touched && form['controls'].visitsOfProtocol['controls'].visitTreatMent.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitTreatMent.errors?.required)">
+                        *Please Select valid Visit Treatment
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].visitWindow.touched && form['controls'].visitsOfProtocol['controls'].visitWindow.errors?.required) || 
+                        (submitted && form['controls'].visitsOfProtocol['controls'].visitWindow.errors?.required)}">
+                          <label for="sname"> Visit Window </label>
+                          <select   formControlName="visitWindow" class="form-control">
+                            <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true"> Select Visit Window </option>
+                            <option *ngFor="let window of visitWindow" [value]="window">{{window}}</option>
+                          </select>
+                          <span class="row input-padding error-message" *ngIf="(form['controls'].visitsOfProtocol['controls'].visitWindow.touched && form['controls'].visitsOfProtocol['controls'].visitWindow.errors?.required) || 
+                      (submitted && form['controls'].visitsOfProtocol['controls'].visitWindow.errors?.required)">
+                            *Please Select valid Visit Treatment
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].startWeek.touched && form['controls'].visitsOfProtocol['controls'].startWeek.errors?.required) || 
+                          (submitted && form['controls'].visitsOfProtocol['controls'].startWeek.errors?.required)}">
+                          <label for="sname"> Start {{form['controls'].visitsOfProtocol['controls'].visitWindow.value}}
+                          </label>
+                          <input type="number" min="1" class="form-control" formControlName="startWeek" placeholder="Enter Start" (keyup)="restrictData($event)">
+                          <span class="row input-padding error-message inputError" *ngIf="(form['controls'].visitsOfProtocol['controls'].startWeek.touched && (form['controls'].visitsOfProtocol['controls'].startWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].startWeek.errors?.min || form['controls'].visitsOfProtocol['controls'].startWeek.errors?.max )) || 
+                      (submitted && (form['controls'].visitsOfProtocol['controls'].startWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].startWeek.errors?.min ||  form['controls'].visitsOfProtocol['controls'].startWeek.errors?.max))">
+                            *Please Select valid Start {{form['controls'].visitsOfProtocol['controls'].visitWindow.value}}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].visitsOfProtocol['controls'].endWeek.touched && (form['controls'].visitsOfProtocol['controls'].endWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].endWeek.errors?.min) ) || 
+                        (submitted && (form['controls'].visitsOfProtocol['controls'].endWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].endWeek.errors?.min ))}">
+                          <label for="sname"> End {{form['controls'].visitsOfProtocol['controls'].visitWindow.value}}
+                          </label>
+                          <input type="number" min="1" class="form-control" formControlName="endWeek" placeholder="Enter End" (keyup)="restrictData($event)">
+                          <span class="row input-padding error-message inputError" *ngIf="(form['controls'].visitsOfProtocol['controls'].endWeek.touched && (form['controls'].visitsOfProtocol['controls'].endWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].endWeek.errors?.min ||  form['controls'].visitsOfProtocol['controls'].endWeek.errors?.max) ) || 
+                      (submitted && (form['controls'].visitsOfProtocol['controls'].endWeek.errors?.required || form['controls'].visitsOfProtocol['controls'].endWeek.errors?.min ||  form['controls'].visitsOfProtocol['controls'].endWeek.errors?.max))">
+                            *Please Select valid End {{form['controls'].visitsOfProtocol['controls'].visitWindow.value}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button class="btn btn-primary tableButton" (click)="saveProtocol()"> Save</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 form-group location visitProtocol mt-2" *ngIf="!isAddProtocol" (click)="isAddProtocol =true;">
+
+                <div class="location-image ">
+                  <img src="./assets/img/icons/placeholder-2.svg" />
+                  <p class="new-region-text"> + Add Visits for Protocol</p>
+
+                </div>
+              </div>
+              <!-- <span class="row input-padding error-message" *ngIf="(!visitsProtocols.length && submitted)">
+                *Please Enter Minimum one Visit Protocol
+              </span> -->
+            </div>
+            <div class="text-center saveButton">
+              <button class="btn btnPrev" (click)="t.select('tableofTask')"> Previous </button>
+              <button class="btn btn-primary btnNext" (click)="valiDateForm('visitsofProtocol')"> Next </button>
+            </div>
+
+          </ng-template>
+        </ngb-tab>
+        <!-------------------------------  Study Medication------------------------------------------------------>
+
+        <ngb-tab id="studyMedication" [disabled]="isStudyMedication">
+          <ng-template ngbTabTitle> Study Medication </ng-template>
+          <ng-template ngbTabContent>
+
+            <div class="row studyMedication">
+              <!--visit -->
+              <div class="col-6" *ngFor="let item of studyMedicationData;let i = index">
+                <p class="formHeading">Medication No. {{ i +1}}</p>
+                <!-- <p class="formHeading">Visit No.{{visitsProtocols.length}}</p> -->
+                <div class="formField">
+                  <div class="form-group">
+                    <label for="sname"> Medication Name </label>
+                    <input type="text" [value]="item.medicineName" disabled class="form-control" />
+                    <!-- <select      disabled class="form-control">
+                      <option [value]="item.medicineName">{{item.medicineName}}</option>
+                    </select> -->
+
+                    <label for="sname"> Cycle Of Duration </label>
+                    <div class="row">
+                      <div class="col-5">
+                        <input type="text" [value]="item.cycleOfDurationNo" disabled class="form-control" />
+                      </div>
+                      <div class="col-7">
+                        <select      class="form-control">
+                          <option [value]="item.cycleOfDurationDays">{{item.cycleOfDurationDays}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <label for="sname"> No of Cycle </label>
+                    <select      class="form-control">
+                      <option [value]="item.noOfCycle">{{item.noOfCycle}}</option>
+                    </select>
+
+                    <label for="sname"> No of Times this medication needs to be taken in a cycle </label>
+                    <div class="row">
+                      <div class="col" *ngFor="let noOfTimes of item.noInCycle">
+                        <select      class="form-control">
+                          <option [value]="noOfTimes">{{noOfTimes}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <label for="sname"> No of doses taken in day </label>
+                    <select      class="form-control">
+                      <option [value]="item.dosePerDay">{{item.dosePerDay}}</option>
+                    </select>
+                    <div class="row">
+                      <div class="col">
+                        <label for="sname"> Doses 1 </label>
+                        <select      class="form-control">
+                          <option>
+                            {{(item.medicineDose['morning'] === true) ? (item.medicineDose.afternoon === true ? 'Morning' : 'Night') : 'Morning'}}</option>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label for="sname" *ngIf="item.dosePerDay > 1"> Dose 2 </label>
+                        <select      class="form-control" *ngIf="item.dosePerDay > 1">
+                          <option>
+                            {{(item.medicineDose.morning === true) ? 'Morning': (item.medicineDose.afternoon === true ? 'AfterNoon' : 'Night')}}</option>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label for="sname" *ngIf="item.dosePerDay > 2"> Dose 3 </label>
+                        <select      class="form-control" *ngIf="item.dosePerDay > 2">
+                          <option>
+                            {{(item.medicineDose.morning === true) ? 'Morning': (item.medicineDose.afternoon === true ? 'AfterNoon' : 'Night')}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row bottomUnderline">
+                      <p class="formHeading"> Rest Cycle ? </p>
+                      <div class="custom-control custom-radio custom-control-inline mt-1">
+                        <input [checked]="item.restCycle ==='Yes' ? true : false" type="radio" id="{{i}}" name="{{i}}"  class="custom-control-input">
+                        <label class="custom-control-label" for="{{i}}">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline mt-1">
+                        <input [checked]="item.restCycle ==='No' ? true : false" type="radio" id="{{i}}" name="{{i}}"   class="custom-control-input">
+                        <label class="custom-control-label" for="{{i}}">No</label>
+                      </div>
+
+                    </div>
+
+                    <div *ngIf="item.restCycle === 'Yes'">
+                      <label for="sname"> No Of Rest Cycle </label>
+                      <select      class="form-control">
+                        <option [value]="item.noOfRestCycle">{{item.noOfRestCycle}}</option>
+                      </select>
+                      <label for="sname"> Rest Cycle 1 Duration </label>
+                      <select      class="form-control">
+                        <option [value]="item.durationOfRestCycle">{{item.durationOfRestCycle}}</option>
+                      </select>
+                      <div class="row">
+                        <div class="col">
+                          <label for="sname"> Rest Cycle End Day </label>
+                          <select      class="form-control">
+                            <option [value]="item.restCycleEndDay">{{item.restCycleEndDay}}</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label for="sname"> Rest Cycle Start Day </label>
+                          <select      class="form-control">
+                            <option [value]="item.restCycleStartDay">{{item.restCycleStartDay}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6" formGroupName="addMedication" *ngIf="isAddMedication">
+
+                <!-- <span (click)="isAddMedication = false"> cancel</span> -->
+                <div class="formField">
+                  <img (click)="isAddMedication=false;submitted=false;" class="cancel-icon mt-2" src="./assets/img/icons/close-button-file.svg" alt="">
+                  <p class="formHeading">Set Medication {{studyMedicationData.length +1}}</p>
+
+                  <div class="form-group">
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].medicineName.touched && form['controls'].addMedication['controls'].medicineName.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].medicineName.errors?.required)}">
+                      <label for="sname"> Medication Name </label>
+                      <input type="text" formControlName="medicineName" class="form-control mb-3" placeholder="Enter Medication Name" />
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].medicineName.touched && form['controls'].addMedication['controls'].medicineName.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].medicineName.errors?.required)">
+                        *Please enter valid Medication Name
+                      </span>
+                    </div>
+                    <label for="cycleOfDurationNo"> Cycle Of Duration </label>
+                    <div class="row">
+                      <div class="col-5" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].cycleOfDurationNo.touched && form['controls'].addMedication['controls'].cycleOfDurationNo.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].cycleOfDurationNo.errors?.required)}">
+                        <input type="number" formControlName="cycleOfDurationNo" class="form-control mb-3 " placeholder="Enter Duration"/>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].cycleOfDurationNo.touched && form['controls'].addMedication['controls'].cycleOfDurationNo.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].cycleOfDurationNo.errors?.required)">
+                          *Please enter valid Duration
+                        </span>
+                      </div>
+                      <div class="col-7" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].cycleOfDurationDays.touched && form['controls'].addMedication['controls'].cycleOfDurationDays.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].cycleOfDurationDays.errors?.required)}">
+                        <select   formControlName="cycleOfDurationDays" class="form-control">
+                            <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Duration Period</option>
+                          <option *ngFor="let duration of cycleOfDurationDays" [value]="duration">{{duration}}</option>
+                        </select>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].cycleOfDurationDays.touched && form['controls'].addMedication['controls'].cycleOfDurationDays.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].cycleOfDurationDays.errors?.required)">
+                          *Please enter valid Duration Period
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].noOfCycle.touched && form['controls'].addMedication['controls'].noOfCycle.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].noOfCycle.errors?.required)}">
+                      <label for="sname"> No. of Cycle </label>
+                      <select   formControlName="noOfCycle" class="form-control" (change)="setNoOfTimes()">
+                          <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select No. of Cycle </option>
+                        <option *ngFor="let cycle of noOfCycle" [value]="cycle">{{cycle}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].noOfCycle.touched && form['controls'].addMedication['controls'].noOfCycle.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].noOfCycle.errors?.required)">
+                        *Please enter valid No. of Cycle
+                      </span>
+                    </div>
+                    <label for="sname" *ngIf="nOfTimes.length"> No. of Times this medication needs to be taken in a cycle </label>
+                    <div class="row">
+
+                      <div formArrayName="noInCycle" class="col" *ngFor="let item of form.controls['addMedication'].get('noInCycle').controls; let i = index;"
+                        [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.touched && form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.errors?.required)}">
+                        <div [formGroupName]="i">
+                          <select   formControlName="time" class="form-control">
+                              <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select valid value </option>
+                            <option *ngFor="let time of noOfTimesTaken" [value]="time">{{time}}</option>
+                          </select>
+                          <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.touched && form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.errors?.required) || 
+                             (submitted && form['controls'].addMedication['controls'].noInCycle['controls'][i]['controls'].time.errors?.required)">
+                            *Please enter valid value
+                          </span>
+
+                        </div>
+                        <!-- <span (click)="addNoOfTimes()">Add</span> -->
+                      </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].dosePerDay.touched && form['controls'].addMedication['controls'].dosePerDay.errors?.required) || 
+(submitted && form['controls'].addMedication['controls'].dosePerDay.errors?.required)}">
+                      <label for="sname"> No. of doses taken in day </label>
+                      <select   formControlName="dosePerDay" class="form-control" (change)="setDoses()">
+                          <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Doses taken in day </option>
+                        <option *ngFor="let doses of noOfDosesTaken" [value]="doses">{{doses}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].dosePerDay.touched && form['controls'].addMedication['controls'].dosePerDay.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].dosePerDay.errors?.required)">
+                        *Please enter valid Doses taken in day
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div class="col" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].doses1.touched && form['controls'].addMedication['controls'].doses1.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].doses1.errors?.required)}">
+                        <label for="sname"> Dose 1 </label>
+                        <select   formControlName="doses1" class="form-control" (change)="setDoesSequence()">
+                            <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Dose 1</option>
+                          <option *ngFor="let day of durationOfDays" [value]="day">{{day}}</option>
+                        </select>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].doses1.touched && form['controls'].addMedication['controls'].doses1.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].doses1.errors?.required)">
+                          *Please enter valid Dose 1
+                        </span>
+                      </div>
+                      <div class="col" *ngIf="dosesLength > 1" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].doses2.touched && form['controls'].addMedication['controls'].doses2.errors?.required) || 
+                          (submitted && form['controls'].addMedication['controls'].doses2.errors?.required)}">
+                        <label for="sname" > Dose 2 </label>
+                        <select   formControlName="doses2" class="form-control" (change)="setDoesSequence()">
+                            <option *ngIf="!(form['controls'].addMedication['controls'].doses2.value)" class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Dose 2</option>
+                          <option *ngFor="let day of durationOfDays" [value]="day">{{day}}</option>
+                        </select>
+                        <span class="row input-padding error-message" *ngIf=" (form['controls'].addMedication['controls'].doses2.touched && form['controls'].addMedication['controls'].doses2.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].doses2.errors?.required)">
+                          *Please enter valid Dose 2
+                        </span>
+                      </div>
+                      <div class="col"  *ngIf="dosesLength > 2" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].doses3.touched && form['controls'].addMedication['controls'].doses3.errors?.required) || 
+                          (submitted && form['controls'].addMedication['controls'].doses3.errors?.required)}">
+                        <label for="sname"> Dose 3 </label>
+                        <select   formControlName="doses3" class="form-control">
+                            <option *ngIf="!(form['controls'].addMedication['controls'].doses3.value)" class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Dose 3</option>
+                          <option *ngFor="let day of durationOfDays" [value]="day">{{day}}</option>
+                        </select>
+                        <span class="row input-padding error-message" *ngIf="  (form['controls'].addMedication['controls'].doses3.touched && form['controls'].addMedication['controls'].doses3.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].doses3.errors?.required)">
+                          *Please enter valid Dose 3
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row bottomUnderline">
+                      <p class="formHeading"> Rest Cycle ? </p>
+                      <div class="custom-control custom-radio custom-control-inline mt-1">
+                        <input type="radio" id="customRadioInline1" name="restCycle"  formControlName="restCycle" value="Yes" class="custom-control-input" (click)="setRestCycle()">
+                        <label class="custom-control-label" for="customRadioInline1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline mt-1">
+                        <input type="radio" id="customRadioInline2" name="restCycle"  formControlName="restCycle" value="No" class="custom-control-input" (click)="setRestCycle()">
+                        <label class="custom-control-label" for="customRadioInline2">No</label>
+                      </div>
+                      <span class="row input-padding error-message specialError" *ngIf="(form['controls'].addMedication['controls'].restCycle.touched && form['controls'].addMedication['controls'].restCycle.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].restCycle.errors?.required)">
+                        *Please select valid Rest Cycle
+                      </span>
+                    </div>
+                    <div *ngIf="form['controls'].addMedication['controls'].restCycle.value === 'Yes'" >
+                    <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].noOfRestCycle.touched && form['controls'].addMedication['controls'].noOfRestCycle.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].noOfRestCycle.errors?.required)}">
+                      <label for="sname"> No Of Rest Cycle </label>
+                      <select   formControlName="noOfRestCycle" class="form-control">
+                          <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select No Of Rest Cycle </option>
+                        <option *ngFor="let restCycle of noOfRestCycle" [value]="restCycle">{{restCycle}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].noOfRestCycle.touched && form['controls'].addMedication['controls'].noOfRestCycle.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].noOfRestCycle.errors?.required)">
+                        *Please enter valid No Of Rest Cycle
+                      </span>
+                      </div>
+                      <div class="form-group"  [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].durationOfRestCycle.touched && form['controls'].addMedication['controls'].durationOfRestCycle.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].durationOfRestCycle.errors?.required)}">
+                      <label for="sname"> Rest Cycle Duration </label>
+                      <select   formControlName="durationOfRestCycle" class="form-control">
+                          <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Rest Cycle Duration</option>
+                       
+                        <option *ngFor="let restCycle of restCycleDuration" [value]="restCycle">{{restCycle}}</option>
+                      </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].durationOfRestCycle.touched && form['controls'].addMedication['controls'].durationOfRestCycle.errors?.required) || 
+                    (submitted && form['controls'].addMedication['controls'].durationOfRestCycle.errors?.required)">
+                        *Please enter valid Rest Cycle Duration
+                      </span>
+                      </div>
+                      <div class="row">
+                        <div class="col" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].restCycleStartDay.touched && form['controls'].addMedication['controls'].restCycleStartDay.errors?.required) || 
+                        (submitted && form['controls'].addMedication['controls'].restCycleStartDay.errors?.required)}">
+                          <label for="sname"> Rest Cycle Start Day </label>
+                          <select   formControlName="restCycleStartDay" class="form-control">
+                              <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Rest Cycle Start Day </option>
+                          
+                            <option *ngFor="let restCycle of restCycleStartDay" [value]="restCycle">{{restCycle}}</option>
+                          </select>
+                          <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].restCycleStartDay.touched && form['controls'].addMedication['controls'].restCycleStartDay.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].restCycleStartDay.errors?.required)">
+                            *Please enter valid Rest Cycle Start Day
+                          </span>
+                        </div>
+                        <div class="col" [ngClass]="{'isInvalid' :(form['controls'].addMedication['controls'].restCycleEndDay.touched && form['controls'].addMedication['controls'].restCycleEndDay.errors?.required) || 
+                        (submitted && form['controls'].addMedication['controls'].restCycleEndDay.errors?.required)}">
+                          <label for="sname"> Rest Cycle End Day </label>
+                          <select   formControlName="restCycleEndDay" class="form-control">
+                          <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Rest Cycle End Day </option>
+                           
+                            <option *ngFor="let restCycle of restCycleEndDay" [value]="restCycle">{{restCycle}}</option>
+                          </select>
+                          <span class="row input-padding error-message" *ngIf="(form['controls'].addMedication['controls'].restCycleEndDay.touched && form['controls'].addMedication['controls'].restCycleEndDay.errors?.required) || 
+                      (submitted && form['controls'].addMedication['controls'].restCycleEndDay.errors?.required)">
+                            *Please enter valid Rest Cycle End Day
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="btn btn-primary tableButton" (click)="saveMedication()">Save</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="!isAddMedication" class="col-6 form-group location visitProtocol mt-2" (click)="isAddMedication=true">
+                <div class="location-image ">
+                  <img src="./assets/img/icons/placeholder-2.svg" />
+                  <p class="new-region-text"> + Add Study Medication</p>
+                </div>
+              </div>
+            </div>
+            <!-- <span class="row input-padding error-message" *ngIf="(!studyMedicationData.length && submitted)">
+              *Please Enter Minimum one Study Medication
+            </span> -->
+            <div class="text-center saveButton">
+              <button class="btn btn-primary btnNext" (click)="valiDateForm('studyMedication')"> Create Trial </button>
+            </div>
+
+          </ng-template>
+
+        </ngb-tab>
+      </ngb-tabset>
+    </form>
+  </div>
+</section>

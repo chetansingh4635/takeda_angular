@@ -1,0 +1,307 @@
+/*Dialog Header Bar*/
+
+.dHeader {
+    margin: -24px -24px 5px -24px;
+    font-size: 18px;
+    color: white;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #1e2733;
+    border: solid 1px #ffffff;
+    padding: 0px 20px;
+  }
+  
+  /*Dialog Close Icon*/
+  
+  .dHeader .cancel-icon {
+    float: right;
+    width: 20px;
+    cursor: pointer;
+  }
+  
+  /* Dialog Form  Label */
+  
+  .dialog-container label {
+    font-size: 14px;
+    color: #7f8fa4;
+  }
+  
+  /* Form Control */
+  
+  .form-control {
+    margin-bottom: 1rem;
+    padding: 0 3px;
+  }
+  
+  /* Dialog Form select boxes and Input Fields */
+  
+  
+   
+  /*.dialog-container select {
+    height: 36px;
+    border: transparent;
+    border-bottom: solid 1px #c3c3c3;
+    border-radius: 0px;
+    
+  } */
+  
+  .dialog-container input {
+    height: 36px;
+    border: transparent;
+    border-bottom: solid 1px #c3c3c3;
+    border-radius: 0px;
+  }
+  
+  .secondDoc {
+    width: 47.4%;
+  }
+  
+  /* Dialog Form Validation */
+  
+  .dialog-container .error-message-form {
+    color: #d0021b;
+    position: absolute;
+    margin: 45px 300px
+  }
+  
+  .dialog-container .error-message {
+    position: absolute;
+    color: #d0021b;
+    float: left;
+    margin-left: 0px;
+    margin-top: 36px;
+    font-size: 11px;
+  }
+  
+  .dialog-container .error-messageFile {
+    position: absolute;
+    color: #d0021b;
+    float: left;
+    margin-left: 15px;
+    margin-top: 155px;
+    font-size: 12px;
+  }
+  .uploadSection img {
+    width: 100%;
+    position: relative;
+  }
+  
+  .uploadSection input {
+    display: none;
+  }
+  
+  .uploadSection .col-md {
+    display: flex;
+  }
+  
+  .fileUploadTextShort {
+    width: 90%;
+    top: 47%;
+    padding: 0 30px;
+    position: absolute;
+    opacity: 0.6;
+    font-size: 14px;
+    line-height: 1.58;
+    color: #7f8fa4;
+    text-align: center;
+  }
+  
+  .fileUploadText {
+    top: 47%;
+    padding: 0 150px;
+    position: absolute;
+    opacity: 0.6;
+    font-size: 14px;
+    line-height: 1.58;
+    color: #7f8fa4;
+    text-align: center;
+  }
+  
+  /* Dialog Form Button */
+  
+  .dialog-container .saveButton {
+    background-color: #28bfc7;
+    border: #28bfc7;
+    color: white;
+    align-items: center;
+  }
+  
+  .dialog-container .dialogButton {
+    display: flex;
+    border-radius: 4px;
+    background-color: #f0f3f8;
+    /* margin: -24px -24px; */
+    margin-bottom: -24px;
+    margin-right: -24px;
+    margin-left: -24px;
+    padding: 12px;
+  }
+  
+  .dialog-container button {
+    font-weight: bold;
+    margin-left: 75%;
+  }
+  
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+  
+  .col-form-label {
+    margin-bottom: 0;
+    min-width: 100%;
+  }
+  
+  .form-group {
+    margin-bottom: 0rem;
+  }
+  
+  .custom-control-label {
+    line-height: 2;
+    color: #354052 ;
+  }
+  
+  .doc-view {
+    background-color: lightgray;
+    justify-content: center;
+  }
+  
+  .file {
+    margin: 10px 38px;
+  }
+  
+  .hRow {
+    width: 1px;
+    margin: 0 10px;
+    border-radius: 0.5px;
+    background-color: #dfe3e9;
+  }
+  
+  .docBox {
+    width: 120px;
+    height: 140px;
+    box-shadow: 0 4px 15px 0 rgba(230, 231, 232, 0.47);
+    background-color: #ffffff;
+    border: solid 1px #dfe3e9;
+    margin: 10px 0px;
+  }
+  
+  .fileNameBox {
+    font-size: 14px;
+    color: #354052;
+    text-align: center;
+    margin: 3px 0px;
+  }
+  
+  .fileNameBox p:nth-child(2),
+  .fileNameBox p:nth-child(3) {
+    font-size: 12px;
+    color: #7f8fa4;
+    margin: 0px 0px;
+  }
+  
+  .custom-radio .custom-control-input:checked ~ .custom-control-label::before{
+    background-color: #28bfc7;
+  }
+  
+  .DocumentIcons{
+      list-style-type: none;
+      margin-left: -25px;
+  }
+  
+  
+  .close{
+    position: absolute;
+    margin: 4px 100px;
+    height: 12px;
+      opacity: 1.2;
+  }
+  .imageDragged{
+    color: #28bfc7;
+    opacity: 2;
+    border-radius: 4px;
+    -webkit-animation: pulse 0.7s ease-in-out forwards;
+    animation: pulse 0.7s ease-in-out forwards;
+  }
+  .imageDragged p{
+    color: #28bfc7;
+    opacity: 2;
+  }
+  @-webkit-keyframes pulse {
+    0% {
+      box-shadow: 0px 0px 0px 0px #01c0c8;
+    }
+    100% {
+      box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0px 0px 0px 0px #01c0c8;
+    }
+    100% {
+      box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+    }
+  }
+  
+  
+  .versionClass input[type=number]::-webkit-inner-spin-button, 
+  .versionClass input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+    margin: 0; 
+  }
+  .versionClass input{
+    background: none;
+  }
+  .addMoreDoc{
+    float: left;
+      font-size: 14px;
+      color: #01c0c8 !important;
+      margin-top: 3%;
+      font-weight: bold;
+  }
+  .bottomUnderline{
+    padding: 3px 0px;
+    border-bottom: solid 1px #c3c3c3; 
+  }
+  
+  .bottomUnderline .custom-control-label{
+  font-size: 16px;
+  margin-top: -3px;
+  }
+  
+  select, input{  
+    background: url('/assets/img/icons/dropdown.svg') no-repeat right;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-position-x: 97%;
+  }
+  
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+    background-color: inherit;
+  }
+  
+  .form-control{
+    color: #354052 !important;
+  }
+  select>option, datalist>option{
+    color: #354052;
+    font-size: 16px;
+  
+  }
+  
+  input[type=radio] + label {
+    color: #9b9b9b;
+  } 
+  input[type=radio]:checked + label {
+    
+     color: #354052;
+   
+  
+  } 

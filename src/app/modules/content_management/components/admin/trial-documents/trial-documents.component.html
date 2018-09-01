@@ -1,0 +1,175 @@
+<div class="container-fluid cm-doc">
+  <div class="row">
+    <div class="cm_filter">
+      <mat-form-field>
+        <img class="filterIcon" src="./assets/img/icons/filter-icon.svg" alt="filter">
+        <mat-select [(ngModel)]="selectedValue" [(value)]="selectedValue" multiple>
+          <div class="parentFilter">
+            <mat-checkbox [checked]="statusValue.length === 2" (change)="parentToggle($event,'status')"> </mat-checkbox>
+            <span class="spanFilter" (click)="toggleFilterSubmenu('showAllStatus')">All Status</span>
+          </div>
+          <mat-optgroup [hidden]="!showAllStatus">
+            <mat-option value="Verified" (click)="childToggle('Verified','status')">Verified </mat-option>
+            <mat-option value="nonVerified" (click)="childToggle('nonVerified', 'status')">Non-Verified </mat-option>
+          </mat-optgroup>
+          <div class="parentFilter">
+            <mat-checkbox [checked]="docTypeValue.length === 2" (change)="parentToggle($event, 'docType')"></mat-checkbox>
+            <span class="spanFilter" (click)="toggleFilterSubmenu('showAllDocumentType')">All Document Type </span>
+          </div>
+          <mat-optgroup [hidden]="!showAllDocumentType">
+            <mat-option value="Site Specific" (click)="childToggle('Site Specific', 'docType')">Site Specific </mat-option>
+            <mat-option value="Global" (click)="childToggle('Global', 'docType')">Global </mat-option>
+          </mat-optgroup>
+          <div class="parentFilter">
+            <mat-checkbox [checked]="langTypeValue.length === defaultLangType.length" (change)="parentToggle($event, 'language')"></mat-checkbox>
+            <span class="spanFilter" (click)="toggleFilterSubmenu('showAllLanguageType')">All Languages</span>
+          </div>
+          <mat-optgroup [hidden]="!showAllLanguageType">
+            <mat-option *ngFor="let lang of languages" [value]="lang.language" (click)="childToggle(lang.language, 'language')">{{lang.language}} </mat-option>
+            <!-- <mat-option value="English" (click)="filterDocuments('English')">English</mat-option> -->
+            <!-- <mat-option value="Spanish" (click)="filterDocuments('Spanish')">Spanish </mat-option> -->
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <div class="text-right">
+        <div class="search">
+          <div class="form-group">
+            <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"
+            />
+            <span class="align-icon">
+              <img class="" src="./assets/img/icons/search.svg" alt="search">
+            </span>
+          </div>
+        </div>
+        <div class="col-auto pull-right">
+          <!-- <button (click)="addDocument()" class="btn btn-primary addBtn">Add</button> -->
+          <!-- <a *ngIf = "url === 'icfOfficial'  || url === 'icfExplanatory' || url === 'studyDescription' || url === 'invitationLetter'  " [routerLink]="addDocument()"  class="btn btn-primary addBtn">Add</a> -->
+          <a *ngIf = "url !=='allDocs'  " [routerLink]="addDocument()"  class="btn btn-primary addBtn">Add</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="dataTable" class="dataTable mt-4 row table-responsive">
+
+    <table class="table" [mfSortBy]="sortType" [mfData]="trialDocData" #mfTrialDocs="mfDataTable" [mfRowsOnPage]="10">
+      <thead class="cust-theme-heading table-content">
+        <tr>
+          <th scope="col">Name
+            <!-- <mfDefaultSorter by="docName">Name</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Version
+            <!-- <mfDefaultSorter by="docVersion">Version</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Site ID
+            <!-- <mfDefaultSorter by="siteId">Site ID</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Site
+            <!-- <mfDefaultSorter by="siteName">Site Name</mfDefaultSorter> -->
+          </th>
+          <th scope="col">CRO ID
+            <!-- <mfDefaultSorter by="croId">CRO ID</mfDefaultSorter> -->
+          </th>
+          <th scope="col">CRO Name
+            <!-- <mfDefaultSorter by="croName">CRO Name</mfDefaultSorter> -->
+          </th>
+          <th scope="col">IRB
+            <!-- <mfDefaultSorter by="irbName">IRB</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Document Type
+            <!-- <mfDefaultSorter by="docType">Document Type</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Language
+            <!-- <mfDefaultSorter by="language">Language</mfDefaultSorter> -->
+          </th>
+          <th scope="col">Status
+            <!-- <mfDefaultSorter by="docStatus">Status</mfDefaultSorter> -->
+          </th>
+          <th scope="col">View</th>
+        </tr>
+      </thead>
+      <tbody class='cust-theme-body'>
+        <tr *ngFor="let item of mfTrialDocs.data ; let i = index">
+          <td class="table-content">{{item.docName ? item.docName : 'NA'}}</td>
+          <td class="table-content">{{item.docVersion ? (item.docVersion.split('.')[1] ? item.docVersion:item.docVersion + '.0'): 'NA'}}</td>
+          <td class="table-content">{{item.siteId ? item.siteId : 'NA'}}</td>
+          <td class="table-content">{{item.siteName ? item.siteName : 'NA'}}</td>
+          <td class="table-content">{{item.croId ? item.croId : 'NA'}}</td>
+          <td class="table-content">{{item.croName ? item.croName :'NA'}}</td>
+          <td class="table-content">{{item.irbInfo.length ? (item.irbInfo[0].irbName ? item.irbInfo[0].irbName : 'NA'):'NA'}}</td>
+          <td class="table-content">{{item.docType ?item.docType : 'NA'}}</td>
+          <td class="table-content">{{item.language ? item.language :'NA'}}</td>
+          <td class="table-content">
+            <!-- <img *ngIf="item.docStatus === 'Verified'" src="./assets/img/icons/verified.svg" alt="pdf">
+            <img *ngIf="item.docStatus === 'nonVerified'" src="./assets/img/icons/nonverified.svg" alt="pdf">
+            -->
+                <button class="btn iqpc"  [ngClass]="{'verified':item.docStatus === 'Verified', 'non-verified':item.docStatus === 'nonVerified' }">
+                    {{item.docStatus ? (item.docStatus === 'nonVerified' ? 'NON-VERIFIED' : 'VERIFIED' ) : 'NA'}} </button>
+          </td>
+          <td class="table-content">
+            <img class="pdf" (click)='viewDocument(item._id)' src="./assets/img/icons/file.svg" alt="pdf">
+          </td>
+        </tr>
+      </tbody>
+      <!-- <tfoot>
+        <tr>
+          <td >
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot> -->
+
+
+    </table>
+
+  </div>
+  <div class="row tblPaginationContainer">
+    <div class="col">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(1)">
+              <i class="fa fa-step-backward" aria-hidden="true" alt="First"></i>
+              <span class="sr-only">First</span>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+              <i class="fa fa-caret-left" aria-hidden="true" alt="Previous"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a class="page-link textColor" (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li class="page-item" *ngIf="(pager.totalPages - pager.startPage) > 5 ">
+            <a class="page-link textColor" (click)="setPage(pager.startPage + 5)">...</a>
+          </li>
+          <li class="page-item" *ngIf="(pager.totalPages - pager.startPage) > 5">
+            <a class="page-link textColor" (click)="setPage(pager.totalPages)">{{pager.totalPages}}</a>
+          </li>
+
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+              <i class="fa fa-caret-right" aria-hidden="true" alt="Next"></i>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.totalPages)">
+              <i class="fa fa-step-forward" aria-hidden="true" alt="Last"></i>
+              <span class="sr-only">Last</span>
+            </a>
+
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</div>

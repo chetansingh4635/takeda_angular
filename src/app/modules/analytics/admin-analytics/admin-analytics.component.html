@@ -1,0 +1,57 @@
+<div class="PageUnderConstruction">
+  <img class="ConstImage" src="./assets/img/page-under-construction.jpg" alt="Page Under Construction">
+ </div>
+
+<!-- <div class="container-fluid cm-doc">
+  <div class="row">
+    <div class="cm_filter">
+
+
+      <div class="multiselect">
+
+
+
+        <div class="selectBox filterddn" (click)="showCheckboxes();">
+          <img class="filterIcon" src="./assets/img/icons/filter-icon.svg" alt="filter">
+
+          <span class="selectedItem"> {{selectedAll}} </span>
+          <i class="fa fa-caret-down ddnIcon"></i>
+          <div class="overSelect"></div>
+        </div>
+        <div id="checkboxes" class="filterddnList">
+          <ul>
+
+            <li class="parent active">
+              <input type="checkbox" [(ngModel)]="selectedAllStatus" (change)="selectAllStatus();" />
+              <label (click)="toggleChildList($event);"> All Status </label>
+              <ul>
+                <li *ngFor="let n of statusType">
+                  <input id="{{n.name}}" type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllStatusSelected();">
+                  <label for="{{n.name}}"> {{n.name}} </label>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="parent">
+              <input type="checkbox" [(ngModel)]="selectedAllDocType" (change)="selectAllDocs();" />
+              <label (click)="toggleChildList($event);"> All Document Type </label>
+              <ul>
+                <li *ngFor="let n of allDocType">
+                  <input id="{{n.name}}" type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllDocsSelected();">
+                  <label for="{{n.name}}"> {{n.name}} </label>
+                </li>
+              </ul>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div> -->

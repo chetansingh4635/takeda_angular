@@ -1,0 +1,17 @@
+<div class="dHeader">
+  <p class="mt-3"> Success
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container">
+  <p>
+    Update! ICF Conversion will take around 5 minutes to convert.
+  </p>
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="closeDialog()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

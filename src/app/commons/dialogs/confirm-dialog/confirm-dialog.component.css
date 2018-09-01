@@ -1,0 +1,47 @@
+.dialog-container {
+  width: 570px;
+
+}
+
+.customRow {
+  padding: 30px 25px;
+}
+
+.dialogButton {
+  border-radius: 4px;
+  background-color: #f0f3f8;
+  display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+}
+
+.checkButtons {
+  width: 120px;
+  height: 36px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.36;
+  text-align: center;
+  margin: 0 11px;
+  margin-left: 0%!important;
+}
+
+.noButton {
+  color: #01c0c8;
+  background-color: #ffffff;
+  border: solid 1px #01c0c8
+}
+
+.yesButton {
+  color: #ffffff;
+  background-color: #01c0c8;
+  border: solid 1px #01c0c8 !important;
+}
+
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

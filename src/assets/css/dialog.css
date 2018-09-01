@@ -1,0 +1,390 @@
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 0px 0px #01c0c8;
+  }
+  100% {
+    box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 0px 0px #01c0c8;
+  }
+  100% {
+    box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+  }
+}
+
+/*Dialog Header Bar*/
+
+.mat-dialog-container .dHeader {
+  margin: -24px -24px 5px -24px;
+  font-size: 18px;
+  color: white;
+  height: 60px;
+  border-radius: 4px;
+  background-color: #1e2733;
+  border: solid 1px #ffffff;
+  padding: 0px 20px;
+}
+
+/*Dialog Close Icon*/
+
+.mat-dialog-container .dHeader .cancel-icon {
+  float: right;
+  width: 15px;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
+/* Dialog Form  Label */
+
+.mat-dialog-container .dialog-container label {
+  font-size: 14px;
+  color: #7f8fa4;
+}
+
+.mat-dialog-container .col-form-label {
+  margin-bottom: 0;
+  min-width: 100%;
+}
+
+.mat-dialog-container .custom-control-label {
+  line-height: 2;
+  color: #354052;
+}
+
+/* Dialog Form select boxes and Input Fields */
+
+ .dialog-container select {
+  height: 36px ;
+  border: transparent;
+  border-bottom: solid 1px #c3c3c3;
+  border-radius: 0px;
+}
+
+.mat-dialog-container .dialog-container input {
+  height: 36px;
+  border: transparent;
+  border-bottom: solid 1px #c3c3c3;
+  border-radius: 0px;
+  -moz-appearance: textfield;
+}
+
+.mat-dialog-container .dialog-container .form-control:focus {
+  box-shadow: 0px 2px 0 0px #01c0c8;
+}
+
+.arrowRight {
+  background: url('/assets/img/icons/dropdown.svg') no-repeat right;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-position-x: 97%;
+}
+  
+input::-webkit-calendar-picker-indicator {
+  display: none;
+  background-color: inherit;
+}
+
+.mat-dialog-container .bottomUnderline {
+  padding: 3px 0px;
+  border-bottom: solid 1px #c3c3c3;
+}
+
+.mat-dialog-container .bottomUnderline .custom-control-label {
+  font-size: 16px;
+  margin-top: -3px;
+}
+
+/* Form Control Margin and Placeholder Padding */
+
+.mat-dialog-container .form-control {
+  margin-bottom: 1rem;
+  padding: 0 3px;
+  color: #354052;
+}
+
+.mat-dialog-container .secondDoc {
+  width: 47.4%;
+}
+
+.mat-dialog-container .custominput {
+  width: 510px;
+}
+
+/*Form Margins and Padding Fields */
+
+.mat-dialog-container .row {
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+
+.mat-dialog-container .form-group {
+  margin-bottom: 0rem;
+}
+
+/* Dialog Form Buttons */
+
+.mat-dialog-container .dialog-container .dialogButton {
+  display: flex;
+  border-radius: 4px;
+  background-color: #f0f3f8;
+  /* margin: -24px -24px; */
+  margin-bottom: -24px;
+  margin-right: -24px;
+  margin-left: -24px;
+  padding: 12px;
+}
+
+/* Dialog Form Save Button */
+
+.mat-dialog-container .dialog-container .saveButton {
+  background-color: #28bfc7;
+  border: #28bfc7;
+  color: white;
+  align-items: center;
+}
+
+.mat-dialog-container .dialog-container button {
+  font-weight: bold;
+  margin-left: 75%;
+}
+
+.mat-dialog-container .addMoreDoc {
+  float: left;
+  font-size: 14px;
+  color: #01c0c8 !important;
+  margin-top: 3%;
+  font-weight: bold;
+}
+
+/* Dialog Upload Section */
+
+.mat-dialog-container .uploadSection img {
+  width: 100%;
+  position: relative;
+}
+
+.mat-dialog-container .uploadSection input {
+  display: none;
+}
+
+.mat-dialog-container .uploadSection .col-md {
+  display: flex;
+}
+
+/* Upload Images Boxes */
+
+.mat-dialog-container .fileUploadTextShort {
+  width: 90%;
+  top: 47%;
+  padding: 0 30px;
+  position: absolute;
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 1.58;
+  color: #7f8fa4;
+  text-align: center;
+}
+
+.mat-dialog-container .fileUploadText {
+  top: 47%;
+  padding: 0 150px;
+  position: absolute;
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 1.58;
+  color: #7f8fa4;
+  text-align: center;
+}
+
+/* Upload Images Boxes Drag Images */
+
+.mat-dialog-container .imageDragged {
+  color: #28bfc7;
+  opacity: 2;
+  border-radius: 4px;
+  -webkit-animation: pulse 0.7s ease-in-out forwards;
+  animation: pulse 0.7s ease-in-out forwards;
+}
+
+.mat-dialog-container .imageDragged p {
+  color: #28bfc7;
+  opacity: 2;
+}
+
+/*File Icons Hide Show Dialog Style */
+
+.mat-dialog-container .hRow {
+  width: 1px;
+  margin: 0 10px;
+  border-radius: 0.5px;
+  background-color: #dfe3e9;
+}
+
+.mat-dialog-container .DocumentIcons {
+  list-style-type: none;
+  margin-left: -25px;
+}
+
+.mat-dialog-container .doc-view {
+  background-color: lightgray;
+  justify-content: center;
+}
+
+.mat-dialog-container .docBox {
+  width: 120px;
+  height: 140px;
+  box-shadow: 0 4px 15px 0 rgba(230, 231, 232, 0.47);
+  background-color: #ffffff;
+  border: solid 1px #dfe3e9;
+  margin: 10px 0px;
+  position: relative;
+}
+
+.mat-dialog-container .file {
+  margin: 10px 38px;
+}
+
+.mat-dialog-container .fileNameBox {
+  font-size: 14px;
+  color: #354052;
+  text-align: center;
+  margin: 3px 0px;
+}
+
+.mat-dialog-container .fileNameBox p:nth-child(2),
+.mat-dialog-container .fileNameBox p:nth-child(3) {
+  font-size: 12px;
+  color: #7f8fa4;
+  margin: 0px 0px;
+}
+
+.mat-dialog-container .close {
+  position: absolute;
+  margin: 4px 100px;
+  height: 12px;
+  opacity: 1.2;
+}
+
+/*Custom Radio Button CSS */
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+  background-color: #28bfc7;
+}
+
+input[type=radio]+label {
+  color: #9b9b9b;
+}
+
+input[type=radio]:checked+label {
+  color: #354052;
+}
+
+/*Custom Input Type Number CSS */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  margin: 0;
+}
+
+.mat-dialog-container .versionClass input {
+  background: none;
+}
+
+/*Custom Select Datalist DatePicker CSS */
+
+.mat-dialog-container input::-webkit-calendar-picker-indicator {
+  display: none;
+  background-color: inherit;
+}
+
+.mat-dialog-container select>option,
+.mat-dialog-container datalist>option {
+  color: #354052;
+  font-size: 16px;
+}
+
+/*Form Validation Style */
+
+.mat-dialog-container .isInvalid ::placeholder {
+  color: #d0021b;
+  opacity: 1;
+}
+
+.mat-dialog-container .isInvalid input,
+.mat-dialog-container .isInvalid select {
+  /* border: transparent; */
+  border-bottom: 1px solid #d0021b;
+  color: #d0021b;
+  border-radius: 0px;
+}
+.mat-dialog-container .isInvalidCheck{
+  color: #d0021b !important;
+  opacity: 1 !important;
+}
+.mat-dialog-container .error-message {
+  position: absolute;
+  color: #d0021b;
+  float: left;
+  margin-left: 0px;
+  margin-top: 36px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  
+}
+
+.mat-dialog-container .error-messageCheck {
+  position: absolute;
+  color: #d0021b !important;
+  opacity: 1 !important;
+  float: left;
+  margin-left: 0px;
+  margin-top: 22px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+
+.mat-dialog-container .dialog-container .error-message-form {
+  color: #d0021b;
+  position: absolute;
+  margin: 45px 300px
+}
+
+.mat-dialog-container .dialog-container .error-messageFile {
+  position: absolute;
+  color: #d0021b;
+  float: left;
+  margin-left: 15px;
+  margin-top: 155px;
+  font-size: 12px;
+}
+
+/* .addSiteCoordinator input {
+  width: 250px; */
+  /* width: -moz-fit-content; */
+/* } */
+
+.customEmail {
+  width: 222px !important;
+}
+
+/* .addSiteCoordinator .saveClass{
+  display: flex !important;
+} */
+
+.confirmDialog {
+  font-size: 18px;
+  line-height: 1.06;
+  text-align: center;
+  color: #354052;
+}

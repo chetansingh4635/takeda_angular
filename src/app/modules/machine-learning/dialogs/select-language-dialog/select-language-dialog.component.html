@@ -1,0 +1,106 @@
+<div class="dHeader">
+  <p class="mt-3"> Create and translate ICF
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="Close Button">
+  </p>
+</div>
+<div class="dialog-container">
+  <form class="catIcfForm" [formGroup]="form" class="row">
+    <div class="col-md">
+
+
+      <div class="form-group col-md mb-4" [ngClass]="{'isInvalid' :(form['controls'].docType.errors?.required && submitted)}">
+        <div class="row">
+          <label for="docType" class="col-form-label row">Document Type</label>
+        </div>
+        <div class="row bottomUnderline">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline1" formControlName="docType" name="docType" value="Protocol Document" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">Protocol Document to ICF</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" formControlName="docType" name="docType" value="Convert ICF" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline2">Convert ICF</label>
+          </div>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].docType.errors?.required && submitted)">
+            *Please select valid Document Type
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md mb-4" [ngClass]="{'isInvalid' :(form['controls'].docLanguage.errors?.required && submitted && form['controls'].docType.value === 'Convert ICF')}">
+        <!-- <div class="form-group row ">
+
+          <label for="language" class="col-form-label">Language</label>
+        </div> -->
+        <div class="row">
+          <div class="col-md-6 custom-bi-col">
+            <div class="row">
+              <label for="docType" class="col-form-label">In which language you want ICF to be?</label>
+            </div>
+            <mat-form-field class="col-md-12 custom-bi-col" (click)="adjestDropdown()">
+              <mat-select id="langSelector" class="row" multiple formControlName="docLanguage">
+                <mat-option *ngFor="let lang of languageList" [value]="lang" >{{lang}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <!-- <div class="row">
+          <select disable class="form-control arrowRight" formControlName="docLanguage">
+            <option value="" [selected]="true" [hidden]="true">Select Language</option>
+            <option *ngFor="let lang of languageList" [value]="lang">{{lang}}</option>
+          </select>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].docLanguage.errors?.required && submitted  && form['controls'].docType.value === 'Convert ICF')">
+            *Please select valid Language
+          </span>
+        </div> -->
+        <div class="col-md-6 custom-bi-col">
+          <div class="row">
+            <label for="docType" class="col-form-label row">Enter Protocol Number</label>
+          </div>
+          <input type="text" class="form-control" formControlName="studyNumber"/>
+        </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row row uploadSection mt-2 mb-4">
+        <ng-container>
+          <div [ngClass]="{'imageDragged': isImageDragged}" (drop)="onDrop($event)" (dragover)="onDragOver($event)" class="col-md"
+            (click)=" file.click()">
+            <img src="./assets/img/fileUpload.png" />
+            <input type="file" #file [multiple]="false" (change)="onFileChange($event)" />
+            <p class="fileUploadTextShort">
+              Drag or Upload a Document</p>
+          </div>
+        </ng-container>
+        <span class="row input-padding error-messageFile" *ngIf="(!files.length && submitted)">
+          * Please upload a valid Document
+        </span>
+      </div>
+    </div>
+    <div class="col-xs hRow" *ngIf="files.length > 0"></div>
+    <ul class="DocumentIcons">
+      <li>
+        <div class="col-xs" *ngIf="files.length > 0">
+          <div class="doc-view docBox" *ngFor="let file of files; let i= index;">
+            <img class="close" src="./assets/img/icons/close-button-file.svg" alt="close" (click)="cancelUpload()">
+            <img class="file" src="./assets/img/icons/file@2x.png" alt="file">
+            <div class="fileNameBox">
+              <p class="mb-0">{{form['controls'].docType.value}}</p>
+              <p>{{form['controls'].docLanguage.value}}</p>
+
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </form>
+
+  <div class="d-flex flex-row row dialogButton">
+
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="convertDoc()">Convert</button>
+      </div>
+    </div>
+  </div>
+</div>

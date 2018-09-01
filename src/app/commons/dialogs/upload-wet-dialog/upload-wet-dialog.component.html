@@ -1,0 +1,50 @@
+<div class="dHeader">
+  <p class="mt-3"> Upload Wet Signature
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container">
+  <form [formGroup]="form" novalidate class="row">
+    <div class="col-md">
+      <div class="d-flex flex-row row uploadSection  mt-2 mb-4">
+        <ng-container>
+          <div [ngClass]="{'imageDragged': isImageDragged}" class="col-md" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+            (click)="file.click()">
+            <img src="./assets/img/fileUpload.svg" />
+            <input type="file" #file formControlName="file" [multiple]="false" (change)="onFileChange1($event)" />
+            <p class="fileUploadTextShort">
+              Drag here or browse for a Wet Signature document to upload.</p>
+          </div>
+        </ng-container>
+        <span class="row input-padding error-messageFile" *ngIf="(!files.length  && !fileErrors && submitted)">
+          *'Please select a document' </span>
+        <span class="row input-padding error-messageFile" *ngIf="(fileErrors)">
+          *{{fileErrors }} </span>
+      </div>
+
+    </div>
+
+    <div class="col-xs hRow" *ngIf="files.length > 0"></div>
+    <ul class="DocumentIcons">
+      <li>
+        <div class="col-xs" *ngIf="files.length > 0">
+          <div class="doc-view docBox">
+            <img class="close" src="./assets/img/icons/close-button-file.svg" alt="" (click)="cancelUpload()">
+            <img class="file" src="./assets/img/icons/file@2x.png" alt="">
+            <div class="fileNameBox">
+              <p class="mb-0">Wet Signature</p>
+            </div>
+          </div>
+
+        </div>
+      </li>
+    </ul>
+  </form>
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="uploadWet()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

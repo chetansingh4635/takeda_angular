@@ -1,0 +1,33 @@
+<div class="container-fluid cm-doc">
+  <div class="row secondTheme">
+    <div class="col">
+      <div class="text-right">
+        <div class="search">
+          <div class="form-group">
+            <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"
+            />
+            <span class="align-icon">
+              <img class="" src="./assets/img/icons/search.svg" alt="search">
+            </span>
+          </div>
+        </div>
+        <!-- <div class="col-auto pull-right">
+          <button (click)="addVideo()" class="btn btn-primary addBtn">Add</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="videosContainer">
+    <div class="row">
+      <mat-card class="col-xs col-sm-4" *ngFor="let video of videoList">
+        <div class="videoCard"> 
+          <iframe width="150" height="120" [src]='video.videoUrl | videoSanitizer' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <div class="videoTitle">{{video.videoName}}</div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+
+</div>

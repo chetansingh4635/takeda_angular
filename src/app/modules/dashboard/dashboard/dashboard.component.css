@@ -1,0 +1,24 @@
+
+#cardContainer::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 9.5px;
+    background-color: rgba(217, 217, 217, 0.5);
+    box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+#cardContainer::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#cardContainer::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    width: 500px;
+    height: 14px;
+    border-radius: 9.5px;
+    background-color: #ffffff;
+    border: solid 1px #e6eaee;
+}

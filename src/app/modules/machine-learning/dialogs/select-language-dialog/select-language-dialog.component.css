@@ -1,0 +1,48 @@
+/*Dialog Header Bar*/
+
+/* .dHeader {
+    margin: -24px -24px 5px -24px;
+    font-size: 18px;
+    color: white;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #1e2733;
+    border: solid 1px #ffffff;
+    padding: 0px 20px;
+  } */
+  
+  /*Dialog Close Icon*/
+  
+  /* .dHeader .cancel-icon {
+    float: right;
+    width: 20px;
+    cursor: pointer;
+  } */
+  
+  /* Dialog Form  Label */
+  
+  .dialog-container p {
+    margin-left: 24px;
+  }
+  
+  /* Form Control */
+  
+ /* .dFooter{
+  margin: 24px -24px -24px -24px;
+  padding: 30px 14px 2px 0px;
+  background: #eff3f6;
+ }
+.languageDdn{
+  display: flex;
+  flex-direction: column;
+}
+.languageDdn > * {
+  width: 100%;
+} */
+
+.custom-bi-col{
+  padding-left: 0px;
+}
+.mat-form-field-infix{
+  border-top : 0px; 
+}

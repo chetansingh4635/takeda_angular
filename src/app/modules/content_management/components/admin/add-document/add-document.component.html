@@ -1,0 +1,225 @@
+<div class="cmAdmin ">
+  <form [formGroup]="form" novalidate>
+    <div class="row">
+      <div class="col-8 cardArrange">
+
+        <!-- <mat-card>
+        <mat-card-subtitle> Add Document </mat-card-subtitle>
+        <div>
+          <ck-editor name="editor1" [(ngModel)]="editorValue" skin="moono-lisa" config="editorConfig" language="en" [fullPage]="true"></ck-editor>
+
+          <button class="btn btn-primary row tableButton" (click)="save()"> Save </button>
+
+        </div>
+    </mat-card> -->
+
+        <mat-accordion dragula="DRAGULA_FACTS">
+          <div formArrayName="documentData" *ngFor="let item of form.get('documentData')['controls']; let i = index;">
+            <mat-expansion-panel class="mb-3 " [ngClass]="{'matCardContainer':panelOpenState[i] === true}" [formGroupName]="i" (opened)="panelOpenState[i] = true"
+            (closed)="panelOpenState[i] = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ panelOpenState[i] === true ? '' : (form['controls'].documentData['controls'][i]['controls'].docKey.value ? form['controls'].documentData['controls'][i]['controls'].docKey.value : 'Enter Title')}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+              <input type="text" class="form-control customTitle" formControlName="docKey" placeholder="Title">
+              <span class="row input-padding error-message" *ngIf="(form['controls'].documentData['controls'][i]['controls'].docKey.errors?.required && form['controls'].documentData['controls'][i]['controls'].docKey.touched) || (form['controls'].documentData['controls'][i]['controls'].docKey.errors?.required && submitted)">
+                *Please Enter valid Title
+              </span>
+            </div>
+              <div class="mt-4 mb-2 row">
+              <ck-editor class="ckEditorWidth"  name="editor1" skin="moono-lisa" config="editorConfig" formControlName="docValue" language="en" [fullPage]="true"></ck-editor>
+              
+              <span class="row input-padding error-message" *ngIf="(form['controls'].documentData['controls'][i]['controls'].docValue.errors?.required && form['controls'].documentData['controls'][i]['controls'].docValue.touched) || (form['controls'].documentData['controls'][i]['controls'].docValue.errors?.required && submitted)">
+                *Please Enter valid description
+              </span>
+            </div>
+            </mat-expansion-panel>
+          </div>
+        </mat-accordion>
+        <mat-card class="form-group location" (click)="addNewQuestion()">
+          <div class="location-image">
+            <img src="./assets/img/icons/plus.svg" />
+            <p class="new-region-text"> + Add New Document</p>
+          </div>
+        </mat-card>
+
+
+      </div>
+      <div class="col-4 floatingDiv">
+               <mat-card *ngIf ="docName === 'Faqs'" class="form-group mb-3">
+          <ngb-tabset #faqTab="ngbTabset" (tabChange) = "faqTabChange($event)" type="pills" class="mt-0">
+            <ngb-tab id="Generic">
+              <ng-template ngbTabTitle> Generic </ng-template>
+              <ng-template ngbTabContent>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="Trial Specific">
+              <ng-template ngbTabTitle class="col"> Trial Specific</ng-template>
+              <ng-template ngbTabContent>
+
+
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </mat-card>
+        <mat-card class="form-group">
+          <label for="docType" class="mb-0">Document Type</label>
+          <ngb-tabset #t="ngbTabset" (tabChange)="tabChanged($event)" type="pills" class="mt-0" [ngClass]="{'widthFull': !(docName === 'ICF Official' || url === 'ICF Explanatory')}">
+
+            <ngb-tab *ngIf="docName === 'ICF Official' || url === 'ICF Explanatory'" id="Site Specific">
+              <ng-template ngbTabTitle> Site Specific </ng-template>
+              <ng-template ngbTabContent>
+                <div formGroupName="siteSpecific">
+                  <div class="d-flex flex-row row">
+                    <div class="col-md form-group">
+                      <div class=" row">
+                        <label for="siteId" class="col-form-label">Site ID</label>
+                      </div>
+                      <div class="row">
+
+                        <input type="text" list="siteID" class="form-control arrowRight" formControlName="siteId" placeholder="Select Site ID" #sId
+                          required="required" #sId (change)="selectSites('siteId', sId.value)">
+                        <datalist id="siteID">
+                          <option *ngFor="let site of sitesList">{{site.siteId}}</option>
+                        </datalist>
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].siteSpecific['controls'].siteId.errors?.required && form['controls'].siteSpecific['controls'].siteId.touched) || (form['controls'].siteSpecific['controls'].siteId.errors?.required && submitted)">
+                          *Please select valid Site Id
+                        </span>
+                      
+                    </div>
+                    <div class="col-md form-group">
+                      <div class=" row ">
+
+                        <label for="siteName" class="col-form-label">Site Name</label>
+                      </div>
+                      <div class="row">
+
+                        <input type="text" list="siteName" class="form-control arrowRight" formControlName="siteName" placeholder="Select Site Name"
+                          required="required" #sName (change)="selectSites('siteName', sName.value)">
+                        <datalist id="siteName">
+                          <option *ngFor="let site of sitesList">{{site.siteName}}</option>
+                        </datalist>
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].siteSpecific['controls'].siteName.errors?.required && form['controls'].siteSpecific['controls'].siteName.touched) || (form['controls'].siteSpecific['controls'].siteName.errors?.required && submitted)">
+                          *Please select valid Site Name
+                        </span>
+                     
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex flex-row row">
+
+                    <div class="col-md form-group">
+                      <div class=" row ">
+
+                        <label for="siteLocaton" class="col-form-label">Site location</label>
+                      </div>
+                      <div class="row">
+
+                        <input type="text" list="siteLocaton" class="form-control arrowRight" formControlName="siteLocation" placeholder="Select Site Location"
+                          required="required"  #sLocation (change)="selectSites('siteLocaton', sLocation.value)">
+                        <datalist id="siteLocaton">
+                          <option *ngFor="let site of sitesList">{{site.siteLocation}}</option>
+                        </datalist>
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].siteSpecific['controls'].siteLocation.errors?.required && form['controls'].siteSpecific['controls'].siteLocation.touched) || (form['controls'].siteSpecific['controls'].siteLocation.errors?.required && submitted)">
+                          *Please select valid Site Location
+                        </span>
+                      
+                    </div>
+                    <div class="form-group col-md versionClass">
+                      <div class="form-group row ">
+
+                      </div>
+                      <div class=" row ">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row row">
+
+                    <div class="col-md form-group">
+                      <div class=" row ">
+
+                        <label for="language" class="col-form-label">Language</label>
+                      </div>
+                      <div class="row">
+                        <select disable class="form-control arrowRight" formControlName="language" required="required">
+                          <option value="" [selected]="true" [hidden]="true">Select Language</option>
+                          <!-- <option>Test</option> -->
+                          <option *ngFor="let lang of languageList" [value]="lang.language" >{{lang.language}}</option>
+                        </select>
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].siteSpecific['controls'].language.errors?.required && form['controls'].siteSpecific['controls'].language.touched) || (form['controls'].siteSpecific['controls'].language.errors?.required && submitted)">
+                          *Please select valid Language
+                        </span>
+                     
+                    </div>
+                    <div class="form-group col-md versionClass">
+                      <div class="row ">
+                        <label for="version" class="col-form-label row">Version</label>
+                      </div>
+                      <div class=" row ">
+                        <input type="number" class="form-control" formControlName="version" placeholder="Enter Version">
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].siteSpecific['controls'].version.errors?.required && form['controls'].siteSpecific['controls'].version.touched) || (form['controls'].siteSpecific['controls'].version.errors?.required && submitted)">
+                          *Please enter valid version
+                        </span>
+                      
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab id="Global">
+              <ng-template ngbTabTitle class="col"> Global </ng-template>
+              <ng-template ngbTabContent formGroupName="global">
+                <div formGroupName="global">
+                  <div class="d-flex flex-row row">
+                    <div class="col-md form-group">
+                      <div class=" row ">
+
+                        <label for="language" class="col-form-label">Language</label>
+                      </div>
+                      <div class="row">
+                        <select disable class="form-control arrowRight" required="required" formControlName="language">
+                          <option value="" [selected]="true" [hidden]="true">Select Language</option>
+                          <!-- <option>Test</option> -->
+                          <option *ngFor="let lang of languageList" [value]="lang.language" >{{lang.language}}</option>
+                        </select>
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].global['controls'].language.errors?.required && form['controls'].global['controls'].language.touched) || (form['controls'].global['controls'].language.errors?.required && submitted)">
+                          *Please enter valid version
+                        </span>
+                     
+                    </div>
+                    <div class="form-group col-md versionClass">
+                      <div class=" row ">
+                        <label for="version" class="col-form-label row">Version</label>
+                      </div>
+                      <div class=" row ">
+                        <input type="number" class="form-control" placeholder="Enter Version" formControlName="version">
+                      </div>
+                        <span class="row input-padding error-message" *ngIf="(form['controls'].global['controls'].version.errors?.required && form['controls'].global['controls'].version.touched) || (form['controls'].global['controls'].version.errors?.required && submitted)">
+                          *Please enter valid version
+                        </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+
+        </mat-card>
+        <button class="btn btn-primary row customPublish" (click)="save()"> Publish </button>
+
+      </div>
+    </div>
+  </form>
+</div>

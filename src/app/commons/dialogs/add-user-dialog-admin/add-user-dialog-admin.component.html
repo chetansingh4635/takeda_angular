@@ -1,0 +1,342 @@
+<div class="dHeader dHeaderExtra">
+  <p class="mt-3" *ngIf= "data.type === 'organisation'"> Add {{data.role === constants.sponsorId ? 'Sponsor':''}}{{data.role === constants.croId ? 'CRO':''}}{{data.role === constants.piId
+      ? 'PI':''}}{{data.role === constants.sitesId ? 'Site':''}} {{data.role === constants.irbId ? 'IRB':''}}
+    <img (click)="dialogRef.close()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+  <p class="mt-3" *ngIf= "data.type === 'user'"> ADD User in {{data.role === constants.sponsorId ? 'Sponsor':''}}{{data.role === constants.croId ? 'CRO':''}}{{data.role === constants.piId
+    ? 'PI':''}}{{data.role === constants.sitesId ? 'Site':''}}  {{data.role === constants.irbId ? 'IRB':''}}
+    <img (click)="dialogRef.close()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container addSiteCoordinator">
+  <form [formGroup]="form" novalidate>
+
+
+    <div class="row widthFull" formGroupName="sponsor" *ngIf="data.role === constants.sponsorId">
+      <div class = "widthFull"  *ngIf="data.type === 'organisation'" formGroupName="organisation">
+      <div class="d-flex flex-row row">  
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].sponsor['controls'].organisation['controls'].orgName.errors?.required && form['controls'].sponsor['controls'].organisation['controls'].orgName.touched) || (form['controls'].sponsor['controls'].organisation['controls'].orgName.errors?.required && submitted)}">
+          <div class="form-group row">
+            <label for="subjectEmail">Sponsor Name</label>
+          </div>
+          <div class="row">
+          <select class="form-control arrowRight" formControlName="orgName" #sName (change)="selectSponsor('sponsor',sName.value)">
+            <option  class= "PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Sponsor Name</option>
+            <option *ngFor="let sponsor of sponsorName" [value]="sponsor.orgName">{{sponsor.orgName}}</option>
+          </select>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].sponsor['controls'].organisation['controls'].orgName.errors?.required && form['controls'].sponsor['controls'].organisation['controls'].orgName.touched) || (form['controls'].sponsor['controls'].organisation['controls'].orgName.errors?.required && submitted)">
+            *Please Select valid Sponsor
+          </span>
+          </div>
+        </div>
+     
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].sponsor['controls'].organisation['controls'].location.errors?.required && form['controls'].sponsor['controls'].organisation['controls'].location.touched) || (form['controls'].sponsor['controls'].organisation['controls'].location.errors?.required && submitted)}">
+          <div class="form-group row">
+            <label for="subjectEmail"> Location</label>
+          </div>
+          <div class="row">
+            <select name="Region" formControlName="location" class="form-control arrowRight" #sLocation (change)="selectSponsor('location',sLocation.value)">
+                <option  class= "PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Location</option>
+              <option *ngFor="let site of sponsorName" [value]="site.location">{{site.location}}</option>
+              <!-- <option  value="test">Test</option> -->
+            </select>
+            <span class="row input-padding error-message" *ngIf="(form['controls'].sponsor['controls'].organisation['controls'].location.errors?.required && form['controls'].sponsor['controls'].organisation['controls'].location.touched) || (form['controls'].sponsor['controls'].organisation['controls'].location.errors?.required && submitted)">
+              *Please enter valid Location
+            </span>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="row widthFull" *ngIf="data.type === 'user'">
+      <div class="widthFull" formArrayName="users" *ngFor="let item of form['controls'].sponsor['controls'].users['controls']; let i = index;">
+        <div [formGroupName]="i" class="row">
+          <div class="col-4" [ngClass]="{'isInvalid' :(form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.touched) || (form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.errors?.required && submitted)}">
+            <div class="form-group row">
+              <label for="name">User ID</label>
+            </div>
+            <div class="row">
+              <input type="text" class="form-control" formControlName="userId" placeholder="Enter User ID">
+                          
+            <span class="row input-padding error-message" *ngIf="(form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.touched) || (form['controls'].sponsor['controls'].users['controls'][i]['controls'].userId.errors?.required && submitted)">
+              *Please enter valid User ID
+            </span>
+            </div>
+
+          </div>
+          <div class="col-4" [ngClass]="{'isInvalid' :(form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)}">
+            <div class="form-group row">
+              <label for="name">User Name</label>
+            </div>
+            <div class="row">
+              <input type="text" class="form-control" formControlName="nickName" placeholder="Enter User Name">
+
+              <span class="row input-padding error-message" *ngIf="(form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].sponsor['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)">
+                  *Please enter valid User Name
+                </span>
+            </div>
+          </div>
+          <div class="col-4" [ngClass]="{'isInvalid' :((form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))}">
+            <div class="form-group row">
+              <label for="name">Email ID</label>
+            </div>
+            <div class="row">
+              <input type="text" class="form-control mb-4" formControlName="emailId" [pattern]="pattern" placeholder="Enter Email ID">
+
+              <!-- <span class="row input-padding error-message" *ngIf="((form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.touched)) || (form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted)"> -->
+                <span class="row input-padding error-message" *ngIf="((form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].sponsor['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))">
+                  *Please enter valid Email ID
+                </span>
+              
+          
+       
+            <!-- <img class="filterIcon addMoreDialog addMoreDifferent" *ngIf="i === sponsorUsers.length-1" (click)="appendSponsorUsers()" src="./assets/img/icons/add.svg"
+              alt="filter"> -->
+            </div>
+            </div>
+        </div>
+
+      </div>
+      <div class="addAnother" (click)="saveSponsorUsers()"> + Add another user </div>
+      </div>
+
+      <!-- <span (click)="appendSiteCoordinator()">Add</span> -->
+    </div>
+    <div class="" formGroupName="cro" *ngIf="data.role === constants.croId">
+        <div class="row" formGroupName="organisation" *ngIf="data.type === 'organisation'">
+          <div class="col-6" [ngClass]="{'isInvalid' :(form['controls'].cro['controls'].organisation['controls'].orgName.errors?.required && form['controls'].cro['controls'].organisation['controls'].orgName.touched) || (form['controls'].cro['controls'].organisation['controls'].orgName.errors?.required && submitted)}">
+            <div class="form-group row">
+              <label for="subjectEmail">Organization Name</label>
+            </div>
+            <div class="row">
+              <input type="text" class="form-control" formControlName="orgName" placeholder="Enter Organization Name" />
+                <span class="row input-padding error-message" *ngIf="(form['controls'].cro['controls'].organisation['controls'].orgName.errors?.required && form['controls'].cro['controls'].organisation['controls'].orgName.touched) || (form['controls'].cro['controls'].organisation['controls'].orgName.errors?.required && submitted)">
+                  *Please enter valid Organization 
+                </span>
+  
+            </div>
+          </div>
+          <div class="col-6" [ngClass]="{'isInvalid' :(form['controls'].cro['controls'].organisation['controls'].orgId.errors?.required && form['controls'].cro['controls'].organisation['controls'].orgId.touched) || (form['controls'].cro['controls'].organisation['controls'].orgId.errors?.required && submitted)}">
+              <div class="form-group row">
+                <label for="subjectEmail">CRO ID</label>
+              </div>
+              <div class="row">
+                <input type="text" class="form-control" formControlName="orgId" placeholder="Enter CRO ID"/>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].cro['controls'].organisation['controls'].orgId.errors?.required && form['controls'].cro['controls'].organisation['controls'].orgId.touched) || (form['controls'].cro['controls'].organisation['controls'].orgId.errors?.required && submitted)">
+                    *Please enter valid CRO ID
+                  </span>
+
+              </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="data.type === 'user'">
+        <div class="widthFull" formArrayName="users" *ngFor="let item of form['controls'].cro['controls'].users['controls']; let i = index;">
+          <div [formGroupName]="i" class="row">
+            <div class="col" [ngClass]="{'isInvalid' :(form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)}">
+              <div class="form-group row">
+                <label for="name">User Name</label>
+              </div>
+              <div class="row">
+                <input type="text" class="form-control" formControlName="nickName" placeholder=" Enter User Name">
+  
+                <span class="row input-padding error-message" *ngIf="(form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].cro['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)">
+                    *Please enter valid User Name
+                  </span>
+              </div>
+            </div>
+            <div class="col" [ngClass]="{'isInvalid' :((form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))}">
+              <div class="form-group row">
+                <label for="name">Email ID</label>
+              </div>
+              <div class="row">
+                <input type="text" class="form-control mb-4" formControlName="emailId" [pattern]="pattern" placeholder="Enter Email ID">
+  
+                <span class="row input-padding error-message" *ngIf="((form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].cro['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))">
+                    *Please enter valid Email ID
+                  </span>
+              
+            
+         
+              <!-- <img class="filterIcon addMoreDialog" *ngIf=" i === croUsers.length-1" (click)="appendCroUsers()" src="./assets/img/icons/add.svg"
+                alt="filter"> -->
+              </div>
+              </div>
+          </div>
+         
+        </div>
+        <div class="addAnother" (click)="saveCroUsers()"> + Add another user </div>
+        
+  </div>
+
+      </div>
+        <div class="" formGroupName="sites" *ngIf="data.role === constants.sitesId">
+          <div class="row siteCoordinatorStyle" formGroupName="organisation" *ngIf="data.type === 'organisation'">
+          <div class="row widthFull">
+            <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].organisation['controls'].orgId.errors?.required && form['controls'].sites['controls'].organisation['controls'].orgId.touched) || (form['controls'].sites['controls'].organisation['controls'].orgId.errors?.required && submitted)}">
+              <div class="form-group row">
+                <label for="subjectEmail">Site ID</label>
+              </div>
+              <div class="row">
+                  <input type="text" class="form-control"  formControlName="orgId" placeholder="Enter Site ID"/>
+                <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].organisation['controls'].orgId.errors?.required && form['controls'].sites['controls'].organisation['controls'].orgId.touched) || (form['controls'].sites['controls'].organisation['controls'].orgId.errors?.required && submitted)">
+                    *Please enter valid Site ID
+                  </span>
+              </div>
+            </div>
+              <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].organisation['controls'].orgName.errors?.required && form['controls'].sites['controls'].organisation['controls'].orgName.touched) || (form['controls'].sites['controls'].organisation['controls'].orgName.errors?.required && submitted)}">
+                <div class="form-group row">
+                  <label for="subjectEmail">Site Name</label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control"  formControlName="orgName" placeholder="Enter Site Name" />
+                  <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].organisation['controls'].orgName.errors?.required && form['controls'].sites['controls'].organisation['controls'].orgName.touched) || (form['controls'].sites['controls'].organisation['controls'].orgName.errors?.required && submitted)">
+                      *Please enter valid Site Name
+                    </span>
+                </div>
+              </div>
+            </div>
+            <div class="row widthFull">
+                <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].organisation['controls'].location.errors?.required && form['controls'].sites['controls'].organisation['controls'].location.touched) || (form['controls'].sites['controls'].organisation['controls'].location.errors?.required && submitted)}">
+                  <div class="form-group row">
+                    <label for="subjectEmail">Site Location</label>
+                  </div>
+                  <div class="row">
+                    <select class="form-control arrowRight" formControlName="location"  >
+                      <option  class= "PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Location</option>
+                      <option *ngFor="let sponsor of sponsorName" [value]="sponsor.location">{{sponsor.location}}</option>
+                    </select>
+                    <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].organisation['controls'].location.errors?.required && form['controls'].sites['controls'].organisation['controls'].location.touched) || (form['controls'].sites['controls'].organisation['controls'].location.errors?.required && submitted)">
+                        *Please enter valid Site Location
+                      </span>
+                  </div>
+                </div>
+          
+                  <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].organisation['controls'].irbId.errors?.required && form['controls'].sites['controls'].organisation['controls'].irbId.touched) || (form['controls'].sites['controls'].organisation['controls'].irbId.errors?.required && submitted)}">
+                    <div class="form-group row">
+                      <label for="subjectEmail">IRB</label>
+                    </div>
+                    <div class="row">
+                        <select class="form-control arrowRight" formControlName="irbId"  >
+                            <option  class= "PlaceholderOption" value="" [selected]="true" [hidden]="true">Select IRB</option>
+                            <option *ngFor="let irb of irbs" [value]="irb.irbId">{{irb.irbId}}</option>
+                          </select>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].organisation['controls'].irbId.errors?.required && form['controls'].sites['controls'].organisation['controls'].irbId.touched) || (form['controls'].sites['controls'].organisation['controls'].irbId.errors?.required && submitted)">
+                          *Please enter valid IRB
+                        </span>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="row" *ngIf="data.type === 'user'">
+          <div class="row widthFull" formArrayName="users" *ngFor="let item of form['controls'].sites['controls'].users['controls']; let i = index;">
+            <div [formGroupName]="i" class="row widthFull">
+                <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.touched) || (form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.errors?.required && submitted)}">
+                    <div class="form-group row">
+                      <label for="name">Role</label>
+                    </div>
+                    <div class="row">
+                        <select name="Region" formControlName="roleId" class="form-control arrowRight">
+                            <option  class= "PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Role</option>
+                          <option *ngFor="let role of roles" [value]="role._id">{{role.name}}</option>
+                        </select>
+                       <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.touched) || (form['controls'].sites['controls'].users['controls'][i]['controls'].roleId.errors?.required && submitted)">
+                          *Please Select Valid Role
+                        </span>
+                    </div>
+                  </div>
+              <div class="col" [ngClass]="{'isInvalid' :(form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)}">
+                <div class="form-group row">
+                  <label for="name">User Name</label>
+                </div>
+                <div class="row">
+                  <input type="text" class="form-control mb-4" formControlName="nickName" placeholder="User Name">
+                  <span class="row input-padding error-message" *ngIf="(form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.touched) || (form['controls'].sites['controls'].users['controls'][i]['controls'].nickName.errors?.required && submitted)">
+                      *Please Enter Valid Name
+                    </span>
+                </div>
+              </div>
+              <div class="col" [ngClass]="{'isInvalid' :((form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))}">
+                <div class="form-group row">
+                  <label for="name">Email ID</label>
+                </div>
+                <div class="row">
+                  <input type="text" class="form-control mb-4" formControlName="emailId" [pattern]="pattern" placeholder="Email ID">
+    
+                  <span class="row input-padding error-message" *ngIf="((form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.errors?.required && form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.touched)  ||(form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.hasError('pattern') && form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.touched)|| (form['controls'].sites['controls'].users['controls'][i]['controls'].emailId.errors?.required && submitted))">
+                      *Please enter valid Email ID
+                    </span>
+                </div>
+              
+<!--            
+                <img class="filterIcon addMoreDialog " *ngIf=" i === siteCoordinators.length-1" (click)="appendSiteCoordinator()" src="./assets/img/icons/add.svg"
+                  alt="filter"> -->
+                </div>
+            </div>
+    
+          </div>
+          <div class="addAnother" (click)="saveSiteCordinators()"> + Add another user </div>
+    </div>
+          <!-- <span (click)="appendSiteCoordinator()">Add</span> -->
+        </div>
+        <div class="" formGroupName="irb" *ngIf="data.role === constants.irbId">
+            <div class="row">
+           <div class="col-md" [ngClass]="{'isInvalid' :(form['controls'].irb['controls'].complianceType.errors?.required && form['controls'].irb['controls'].complianceType.touched) || (form['controls'].irb['controls'].complianceType.errors?.required && submitted)}">
+                <div class="form-group row">
+                  <label for="subjectEmail">Compliance Type</label>
+                </div>
+                <div class="row">
+                  <input type="text"  class="form-control " formControlName="complianceType" placeholder="Enter Compliance Type"/>
+                  <span class="row input-padding error-message" *ngIf="(form['controls'].irb['controls'].complianceType.errors?.required && form['controls'].irb['controls'].complianceType.touched) || (form['controls'].irb['controls'].complianceType.errors?.required && submitted)">
+                      *Please enter valid Compliance Type
+                    </span>
+                  <!-- <select name="Region" formControlName="orgName" class="form-control">
+                    <option *ngFor="let sponsor of sponsorName" [value]="sponsor.name">{{sponsor.name}}</option>
+                  </select> -->
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md" [ngClass]="{'isInvalid' :(form['controls'].irb['controls'].irbId.errors?.required && form['controls'].irb['controls'].irbId.touched) || (form['controls'].irb['controls'].irbId.errors?.required && submitted)}">
+                  <div class="form-group row">
+                    <label for="subjectEmail">IRB ID</label>
+                  </div>
+                  <div class="row">
+                    <input type="text"  class="form-control " formControlName="irbId" placeholder="Enter IRB ID"/>
+                    <span class="row input-padding error-message" *ngIf="(form['controls'].irb['controls'].irbId.errors?.required && form['controls'].irb['controls'].irbId.touched) || (form['controls'].irb['controls'].irbId.errors?.required && submitted)">
+                        *Please enter valid IRB ID
+                      </span>
+                    <!-- <select name="Region" formControlName="orgName" class="form-control">
+                      <option *ngFor="let sponsor of sponsorName" [value]="sponsor.name">{{sponsor.name}}</option>
+                    </select> -->
+                  </div>
+                </div>
+              
+                <div class="col-md" [ngClass]="{'isInvalid' :(form['controls'].irb['controls'].irbName.errors?.required && form['controls'].irb['controls'].irbName.touched) || (form['controls'].irb['controls'].irbName.errors?.required && submitted)}">
+                    <div class="form-group row">
+                      <label for="subjectEmail">IRB Name</label>
+                    </div>
+                    <div class="row">
+                        <input type="text"  class="form-control mb-4 " formControlName="irbName" placeholder="Enter IRB Name"/>
+                      <span class="row input-padding error-message" *ngIf="(form['controls'].irb['controls'].irbName.errors?.required && form['controls'].irb['controls'].irbName.touched) || (form['controls'].irb['controls'].irbName.errors?.required && submitted)">
+                          *Please enter valid IRB Name
+                        </span>
+                      <!-- <select name="Region" formControlName="orgName" class="form-control">
+                        <option *ngFor="let sponsor of sponsorName" [value]="sponsor.name">{{sponsor.name}}</option>
+                      </select> -->
+                    </div>
+                  </div>
+                </div>
+
+      
+            <!-- <span (click)="appendSiteCoordinator()">Add</span> -->
+          </div>
+  </form>
+
+
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="saveUsers()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

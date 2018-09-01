@@ -1,0 +1,270 @@
+.pageBackground {
+  z-index: 0 !important;
+  /* display: table; */
+  width: 100%;
+  min-width: 992px;
+  height: 99.9%;
+  /* overflow-y: scroll; */
+  overflow-y: overlay;
+}
+
+.pageAside {
+  background: #212831;
+  display: block;
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  width: 75px;
+  min-height: 615px;
+  z-index: 5;
+}
+
+.closeAside {
+  width: 300px;
+}
+
+.navParent {
+  background: #212831;
+  display: inline-block;
+  position: fixed;
+  left: 0px;
+  /* height: 100%; */
+  width: 75px;
+  z-index: 3;
+  height: inherit;
+}
+
+.navParent i {
+  color: #505a6b;
+}
+
+.navParent ul {
+  margin: 0px -40px;
+  width: 110px;
+  text-align: center;
+}
+
+.navParent ul li {
+  margin: 40px 0px;
+}
+
+.logo {
+  padding: 49px 34px;
+  background: #242b36;
+}
+
+.navChild {
+  width: 0px;
+  overflow: hidden;
+  float: left;
+  position: fixed;
+}
+
+.openLefMenu {
+  width: 225px !important;
+  margin-left: 75px;
+  height: 100%;
+}
+
+.leftNavMenu {
+  background: #242b36;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  height: 100%;
+  width: 225px;
+}
+
+.leftNavMenu .list-group-item {
+  background: transparent;
+  border: 0;
+  padding: 0 0 0 0;
+}
+
+.leftNavMenu .sub_group {
+  padding: 0px 13px;
+}
+
+.submenu {
+  padding: 0px;
+}
+
+.toggleSubMenu {
+  display: block !important;
+}
+
+.submenu li a {
+  margin-left: 5px;
+}
+
+.leftNavMenu .activerout {
+  background: #28bfc7;
+}
+
+.leftNavMenu .activerout a {
+  font-weight: bold;
+  color: #ffffff !important;
+}
+
+.leftNavMenu li {
+  cursor: pointer;
+}
+
+.leftNavMenu .submenu a {
+  display: inline-block;
+  padding: 17px 60px 17px 10px;
+  width: 110%;
+  max-width: 250px;
+  z-index: 1;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1;
+  color: #b7c0cd;
+  outline: none;
+width: -moz-max-content;
+}
+
+/* ========= header css =========== */
+
+header {
+  background: #fff;
+  width: 100%;
+  z-index: 1;
+}
+
+.toggleMenuBtn {
+  cursor: pointer;
+}
+
+header .bredcrum {
+  text-transform: capitalize;
+  margin-left: 0.5%;
+  font-size: 16px;
+  display: inline-block;
+}
+
+header .trialName {
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.tm_spacer {
+  flex: 1 1 auto;
+}
+
+.dropdown-toggle::after {
+  display: none;
+  content: "";
+}
+
+.userDropwdown {
+  left: 3px !important;
+  top: 52px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 8px 13px 0 rgba(0, 0, 0, 0.15);
+  background-color: #242b36;
+}
+
+.userDropwdown .dropdown-item {
+  font-weight: bold;
+  color: #b7c0cd;
+}
+
+.userDropwdown .dropdown-item:hover,
+.dropdown-item:focus {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #28bfc7;
+}
+
+.userDropwdown:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 85%;
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-bottom-color: #242b36;
+  border-top: 0;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+
+.user-welcome {
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #1d2531;
+  /* position: absolute;
+  margin: 6px -170px; */
+}
+
+header .userProfileImg {
+  width: 35px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.user-notification {
+  font-size: 25px;
+  font-size: 25px;
+  margin: 0px 14px;
+  position: relative;
+  top: 5px;
+}
+
+header .notification {
+  width: 20px;
+  margin-bottom: -5px;
+}
+
+header .headerBottomBorder {
+  border-bottom: 1px solid #e9ecef;
+}
+
+header .mat-toolbar {
+  font: 500 20px/32px sans-serif;
+  background: transparent;
+  color: #000;
+}
+
+header .mat-toolbar-row {
+  padding: 0px 14px 0 25px;
+}
+
+/* ========= header css end =========== */
+
+.pageContainer {
+  margin-left: 75px;
+  /* padding-bottom: 30px; */
+}
+
+.pushPageContainer {
+  overflow: hidden;
+  margin-left: 300px;
+}
+
+.mainContainer {
+  /* margin: 25px 10px 0px 20px; */
+  margin: 20px -5px 0px 20px;
+}
+
+.datalist-arrow {
+  position: relative;
+}
+
+.dateStyleBread {
+  font-size: 14px;
+  color: #354052;
+}
+
+.roleStyle {
+  opacity: 0.8;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #1d2531;
+  margin-top: -12px;
+  position: absolute;
+  right: 54%;
+}

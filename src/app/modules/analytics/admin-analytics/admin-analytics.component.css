@@ -1,0 +1,55 @@
+.container-fluid{
+    background: #8080804d;
+    height: 500px;
+    width: 100%;
+}
+
+
+.cm_filter{
+    margin: 16px;
+    position: relative;
+}
+
+.filterddn{
+    background: #fff;
+    width: 250px;
+    min-height: 55px;
+    border-radius: 5px;
+    padding: 14px 11px;
+    background-image: linear-gradient(to top, #f2f4f7, #ffffff);
+    border: solid 1px #ced0da;
+}
+.filterddn span.selectedItem{
+    margin: 0px 20px;
+}
+.cm_filter .filterIcon {
+    position: absolute;
+    top: 22px;
+    left: 9px;
+}
+.filterddn button{
+    background-image: linear-gradient(to top, #f2f4f7, #ffffff);
+}
+
+.filterddn i{
+    float: right;
+    padding: 5px 0px;
+}
+.parent ul{
+    display: none;
+    list-style: none;
+}
+.active ul{
+    display: block;
+}
+.filterddnList{
+    display: none;
+    box-shadow: 0px 3px 8px 1px grey;
+    margin: 2px 0;
+    background-image: linear-gradient(to top, #f2f4f7, #ffffff);
+}
+.filterddnList > ul{
+    list-style: none;
+    margin: 0px;
+    padding: 14px 14px 14px 0px;
+}

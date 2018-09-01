@@ -1,0 +1,208 @@
+<div class="dHeader">
+  <p class="mt-3"> Add New Trial
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container createTrial">
+  <form [formGroup]="form" novalidate class=" row">
+    <div class="dialog-form trialDetailsStyle" formGroupName="trialDetails">
+      <div class="form-group col" >
+        <div class="row">
+          <label for="sname"> Choose Sponsor Name </label>
+        </div>
+        <div class="row" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].sponsorName.errors?.required && form['controls'].trialDetails['controls'].sponsorName.touched )  || (form['controls'].trialDetails['controls'].sponsorName.errors?.required && submitted)}">
+          <select class="form-control arrowRight" formControlName="sponsorName" untouched>
+            <option *ngIf="!(form['controls'].trialDetails['controls'].sponsorName.value)" class="PlaceholderOption" value="" [selected]="true"
+              [hidden]="true">Select Sponsor Name</option>
+            <option *ngFor="let sponsor of sponsorNameList" [value]="sponsor.orgName">{{sponsor.orgName}}</option>
+          </select>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].sponsorName.errors?.required && form['controls'].trialDetails['controls'].sponsorName.touched )  || (form['controls'].trialDetails['controls'].sponsorName.errors?.required && submitted)">
+            *Please select valid Sponsor Name
+          </span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialName.errors?.required && form['controls'].trialDetails['controls'].trialName.touched )  || (form['controls'].trialDetails['controls'].trialName.errors?.required && submitted)}">
+          <div class="row">
+            <label for="trialName">Trial Name</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="trialName" placeholder="Enter Trial Name">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialName.errors?.required && form['controls'].trialDetails['controls'].trialName.touched )  || (form['controls'].trialDetails['controls'].trialName.errors?.required && submitted)">
+              *Please enter valid Trial Name
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialTitle.errors?.required && form['controls'].trialDetails['controls'].trialTitle.touched )  || (form['controls'].trialDetails['controls'].trialTitle.errors?.required && submitted)}">
+          <div class="row">
+            <label for="trialTitle">Trial Title</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="trialTitle" placeholder="Enter Trial Title">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialTitle.errors?.required && form['controls'].trialDetails['controls'].trialTitle.touched )  || (form['controls'].trialDetails['controls'].trialTitle.errors?.required && submitted)">
+              *Please enter valid Trial Title
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row row">
+        <div class="form-group col" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && form['controls'].trialDetails['controls'].trialProtocolNumber.touched )  || (form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && submitted)}">
+          <div class="row">
+            <label for="trialProtocolNumber">Trial Protocol Number</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="trialProtocolNumber" placeholder="Enter Trial Protocol Number">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && form['controls'].trialDetails['controls'].trialProtocolNumber.touched )  || (form['controls'].trialDetails['controls'].trialProtocolNumber.errors?.required && submitted)">
+              *Please enter valid Trial Protocol Number
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row row">
+        <div class="col-6">
+          <div class="form-group row">
+            <label for="choosefile"> Protocol Document</label>
+          </div>
+          <div class="row">
+              <label for="file-upload" class="custom-file-upload mt-0" [ngClass]="{'isInvalidSpecial' :(form['controls'].trialDetails['controls'].protocolDocument.errors?.required && form['controls'].trialDetails['controls'].protocolDocument.touched )  || (form['controls'].trialDetails['controls'].protocolDocument.errors?.required && submitted) || fileErrors}">
+                  <img class="file-upload " src="./assets/img/icons/upload.svg" alt="file-upload">{{files.length ? files[0].name : ('Choose File')}}
+                </label>
+            <input type="file" class="form-control" id="file-upload" formControlName="protocolDocument" (change)=onFileChange($event)
+              placeholder="Choose File">
+            <span class="row input-padding error-message differentError1" *ngIf="(form['controls'].trialDetails['controls'].protocolDocument.errors?.required && form['controls'].trialDetails['controls'].protocolDocument.touched )  || (form['controls'].trialDetails['controls'].protocolDocument.errors?.required && submitted )">
+              *Please select valid Protocol Document
+            </span>
+            <span class="row input-padding error-message differentError1" *ngIf="(fileErrors)">
+              *Please select valid Docx Protocol Document
+            </span>
+          </div>
+
+        </div>
+        <div class="col-6">
+          <div class="form-group" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].version.errors?.required && form['controls'].trialDetails['controls'].version.touched )  || (form['controls'].trialDetails['controls'].version.errors?.required && submitted)}">
+            <div class="form-group row">
+              <label for="version"> Version </label>
+            </div>
+            <div class="row">
+              <input type="number" class="form-control" formControlName="version" placeholder="Enter Version">
+              <span class="row input-padding error-message differentError" *ngIf="(form['controls'].trialDetails['controls'].version.errors?.required && form['controls'].trialDetails['controls'].version.touched )  || (form['controls'].trialDetails['controls'].version.errors?.required && submitted)">
+                *Please select valid Version
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row row">
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && form['controls'].trialDetails['controls'].regulatoryBody.touched )  || (form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && submitted)}">
+          <div class="row">
+            <label for="regulatoryBody">Regulatory Body</label>
+          </div>
+          <div class="row">
+            <select class="form-control arrowRight" formControlName="regulatoryBody" untouched>
+              <option class="PlaceholderOption" *ngIf="!(form['controls'].trialDetails['controls'].regulatoryBody.value)" value="" [selected]="true"
+                [hidden]="true">Select IRB Name</option>
+              <option *ngFor="let irb of irbList" [value]="irb.irbName">{{irb.irbName}}</option>
+            </select>
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && form['controls'].trialDetails['controls'].regulatoryBody.touched )  || (form['controls'].trialDetails['controls'].regulatoryBody.errors?.required && submitted)">
+              *Please enter valid Regulatory Body
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && form['controls'].trialDetails['controls'].therapeuticArea.touched )  || (form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && submitted)}">
+          <div class="row">
+            <label for="therapeuticArea">Therapeutic Area</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="therapeuticArea" placeholder="Enter Therapeutic Area">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && form['controls'].trialDetails['controls'].therapeuticArea.touched )  || (form['controls'].trialDetails['controls'].therapeuticArea.errors?.required && submitted)">
+              *Please enter valid Therapeutic Area
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].diseaseName.errors?.required && form['controls'].trialDetails['controls'].diseaseName.touched )  || (form['controls'].trialDetails['controls'].diseaseName.errors?.required && submitted)}">
+          <div class="row">
+            <label for="diseaseName">Disease Name</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="diseaseName" placeholder="Enter Disease Name">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].diseaseName.errors?.required && form['controls'].trialDetails['controls'].diseaseName.touched )  || (form['controls'].trialDetails['controls'].diseaseName.errors?.required && submitted)">
+              *Please enter valid Disease Name
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].designOfTrial.errors?.required && form['controls'].trialDetails['controls'].designOfTrial.touched )  || (form['controls'].trialDetails['controls'].designOfTrial.errors?.required && submitted)}">
+          <div class="row">
+            <label for="typeOfMolecule">Type of Molecule</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="designOfTrial" placeholder="Enter Design of Trial">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].designOfTrial.errors?.required && form['controls'].trialDetails['controls'].designOfTrial.touched )  || (form['controls'].trialDetails['controls'].designOfTrial.errors?.required && submitted)">
+              *Please enter Valid Design of Trial
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-row row">
+        <div class="form-group col-6" [ngClass]="{'isInvalid' :(form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && form['controls'].trialDetails['controls'].typeOfMolecule.touched )  || (form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && submitted)}">
+          <div class="row">
+            <label for="designOfTrial">Design of Trial</label>
+          </div>
+          <div class="row">
+            <input type="text" class="form-control" formControlName="typeOfMolecule" placeholder="Enter Type of Molecules">
+            <span class="row input-padding error-message" *ngIf="(form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && form['controls'].trialDetails['controls'].typeOfMolecule.touched )  || (form['controls'].trialDetails['controls'].typeOfMolecule.errors?.required && submitted)">
+              *Please enter valid Type of Molecule
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-row row mb-4">
+        <div class="form-group col-md" >
+          <div class="row">
+            <label for="phase">Phase of Trial</label>
+          </div>
+          <div class="row phases">
+            <div formArrayName="phaseOfTrial" *ngFor="let item of form['controls'].trialDetails.get('phaseOfTrial')['controls']; let i = index;">
+              <div [formGroupName]="i">
+                <mat-checkbox formControlName="phase" [value]="phases[i].value" (change)="setPhase()"> </mat-checkbox>
+                <span class=" form-group" >{{phases[i].value}}</span>
+              </div>
+            </div>
+            <span class="row input-padding error-messageCheck" *ngIf="(!phasesName.length && submitted)">
+              *Please select valid phase
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="saveTrial()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

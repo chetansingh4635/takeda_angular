@@ -1,0 +1,154 @@
+<section class="greybg">
+  <div class="greybgContainer umaContainer">
+    <div class="row greybgHeaderRow">
+      <div class="col">
+        <div class="text-right">
+          <div class="search">
+            <div class="form-group">
+              <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"/>
+              <span class="align-icon">
+                <img class="" src="./assets/img/icons/search.svg" alt="search">
+              </span>
+            </div>
+          </div>
+          <div class="col-auto pull-right">
+            <button class="btn btn-primary addBtn" (click)="openDialog('organisation',url)">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="(url === 'sponsor' ) || ( url === 'cro')">
+      <mat-card class="mb-4" *ngFor="let item of userList; let i= index;">
+        <mat-card-title>
+          <div class="cardTitile">
+            {{item.orgName}}
+          </div>
+          <div class="pull-right mb-3">
+            <button class="btn btn-primary addUser" (click)="openDialog('user', item)"> + Add User </button>
+            <div class="delete deleteSite pull-right">
+              <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="" (click)="deleteOrgnisation(item._id)">
+            </div>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle *ngIf="url === 'cro'"> {{item.orgId ? item.orgId : ''}} </mat-card-subtitle>
+        <mat-card-content>
+          <table class="table table-hover">
+            <thead class="cust-theme-heading table-content">
+              <tr>
+                <th *ngIf=" url === 'sponsor'" scope="col">User ID</th>
+                <th scope="col">User Name</th>
+                <th scope="col"> Email ID </th>
+                <th *ngIf=" url === 'sponsor'" scope="col">Location</th>
+                <th scope="col">Action </th>
+              </tr>
+            </thead>
+            <tbody class='cust-theme-body'>
+              <tr *ngFor="let user of item.users; let x= index;">
+                <td *ngIf=" url === 'sponsor'" class="table-content">{{user.userId}} </td>
+                <td class="table-content">{{user.nickName}} </td>
+                <td class="table-content">{{user.emailId}} </td>
+                <td *ngIf=" url === 'sponsor'" class="table-content">{{item.location}} </td>
+                <td class="table-content">
+                  <img class="filterIcon" src="./assets/img/icons/delete.svg" alt="" (click)="deleteUser(user._id)">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 siteCoordinatorDrop" *ngIf="(url === 'siteCoordinator' )">
+      <mat-card class="mb-4" *ngFor="let item of userList; let i= index;">
+        <mat-card-title>
+          
+            <div class="cardTitile">
+              {{item.orgName}}
+              <ng-template #popContent>Site Location : <span class="toolTipType">{{item.location}}</span> <br>IRB ID : <span class="toolTipType">{{item.irbId}}</span></ng-template>
+              <!-- <i class="fa fa-info-circle toolTip" data-html="true" aria-hidden="true" [ngbTooltip]="popContent" ></i> -->
+              <img  class="toolTip" src="./assets/img/icons/info_icon.png" data-html="true" [ngbTooltip]="popContent" alt="Info Button">
+          </div>
+          <div class="pull-right mb-3">
+            <button class="btn btn-primary addUser" (click)="openDialog('user', item)"> + Add User </button>
+            <div class="delete deleteSite pull-right">
+              <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteOrgnisation(item._id)">
+            </div>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle> {{item.orgId ? item.orgId : ''}} </mat-card-subtitle>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <table class="table table-hover">
+                <thead class="cust-theme-heading table-content">
+                  <tr>
+                    <th scope="col">Site Coordinator</th>
+                    <th scope="col"> Email ID </th>
+                    <th scope="col">Action </th>
+                  </tr>
+                </thead>
+                <tbody class='cust-theme-body'>
+                  <tr *ngFor="let user of item.users['5b334063dad6941db245232a'] let x= index;">
+                    <td class="table-content">{{user.nickName}} </td>
+                    <td class="table-content">{{user.emailId}} </td>
+                    <td class="table-content">
+                      <img class="filterIcon" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <table class="table table-hover">
+                <thead class="cust-theme-heading table-content">
+                  <tr>
+                    <th scope="col">PI Name</th>
+                    <th scope="col"> Email ID </th>
+                    <th scope="col">Action </th>
+                  </tr>
+                </thead>
+                <tbody class='cust-theme-body'>
+                  <tr *ngFor="let user of item.users['5b334063dad6941db245232c']; let x= index;">
+                    <td class="table-content">{{user.nickName}} </td>
+                    <td class="table-content">{{user.emailId}} </td>
+                    <td class="table-content">
+                      <img class="filterIcon" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+  </div>
+</section>
+<section>
+  <div class="irbTable additionIRB" *ngIf="url === 'irb'">
+    <table class="table table-hover">
+      <thead class="cust-theme-heading  table-content">
+        <tr>
+          <th scope="col">Compliance Type</th>
+          <th scope="col"> IRB ID </th>
+          <th scope="col">IRB Name </th>
+          <th scope="col">Action </th>
+        </tr>
+      </thead>
+      <tbody class='cust-theme-body'>
+        <tr *ngFor="let irb of userList">
+          <td class="table-content">{{irb.complianceType ? irb.complianceType : 'NA'}} </td>
+          <td class="table-content">{{irb.irbId ? irb.irbId :'NA'}} </td>
+          <td class="table-content"> {{irb.irbName ? irb.irbName :'NA'}} </td>
+          <td class="table-content">
+            <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteIrb(irb._id)">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

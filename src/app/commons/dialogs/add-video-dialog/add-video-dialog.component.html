@@ -1,0 +1,73 @@
+<div class="dHeader">
+  <p class="mt-3"> Add Video
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="Close Button">
+  </p>
+</div>
+<div class="dialog-container">
+  <form [formGroup]="form" novalidate class="row">
+      <div class="col-md">
+      <!-- <div class="d-flex flex-row row">
+        <div class="form-group">
+          <div class="row">
+            <label for="videoLink" class="col-form-label row">Video Link</label>
+          </div>
+          <div class="row">
+            
+            <input type="url" class="form-control" formControlName="videoLink" placeholder="Enter Video Link">
+            <span class="row input-padding error-message" >
+              *Please enter valid Video Link
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row row">
+        <div class="form-group">
+          <div class="row">
+            <label for="videoTitle" class="col-form-label row">Video Title</label>
+          </div>
+          <div class="row">
+            
+            <input type="text" class="form-control" formControlName="videoTitle" placeholder="Enter Video Title">
+            <span class="row input-padding error-message" >
+              *Please enter valid Video Title
+            </span>
+          </div>
+        </div>
+      </div> -->
+      <div class="d-flex flex-row row">
+          <div class="form-group  " >
+            <div class="row">
+                <label for="videoLink" class="col-form-label row">Video Link</label>
+            </div>
+            <div class="row" [ngClass]="{'isInvalid' :((form['controls'].videoLink.errors?.required && form['controls'].videoLink.touched)  ||(!validUrl && form['controls'].videoLink.touched)|| (form['controls'].videoLink.errors?.required&& submitted))}">
+                <input type="url" class="form-control custominput"  (ngModelChange)="check($event)"  formControlName="videoLink" placeholder="Enter Video Link">
+                <span class="row input-padding error-message"  *ngIf="((form['controls'].videoLink.errors?.required && form['controls'].videoLink.touched)  ||(!validUrl && form['controls'].videoLink.touched)|| (form['controls'].videoLink.errors?.required&& submitted))">
+                  *Please enter valid Video Link
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-row row">
+          <div class="form-group " >
+              <div class="row" >
+                  <label for="videoLink" class="col-form-label row">Video Title</label>
+              </div>
+            <div class="row" [ngClass]="{'isInvalid' :((form['controls'].videoTitle.errors?.required && form['controls'].videoTitle.touched) || (form['controls'].videoTitle.errors?.required&& submitted))}">
+   
+                <input type="text" class="form-control custominput"   formControlName="videoTitle" placeholder="Enter Video Title">
+                <span class="row input-padding error-message"  *ngIf="((form['controls'].videoTitle.errors?.required && form['controls'].videoTitle.touched) || (form['controls'].videoTitle.errors?.required&& submitted))">
+                  *Please enter valid Video Title
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse  (click)="addVideo()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

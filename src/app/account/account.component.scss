@@ -1,0 +1,222 @@
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 0px 0px #01c0c8;
+  }
+  100% {
+    box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0px 0px 0px #01c0c8;
+  }
+  100% {
+    box-shadow: 0px 0px 80px 25px rgba(189, 195, 199, 0);
+  }
+}
+
+// Styling for Login Page. //
+.mainSection {
+  height: 100%;
+  width: 100%;
+  min-width: 768px;
+}
+
+.loginLogo {
+  text-align: center;
+  padding: 42px 0px;
+}
+
+.loginForm {
+  max-width: 450px;
+  padding: 15px 35px 20px;
+}
+
+.form-signin {
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #86b6e6;
+}
+
+.loginTop .welcome {
+  font-size: 16px;
+  line-height: 1.63;
+  color: #afafaf;
+}
+
+.loginTop {
+  text-align: center;
+  background-color: #f8fafc;
+  border: solid 1px #e6eaee;
+  font-size: 20px;
+  line-height: 1.3;
+  color: #354052; // padding: 18px 0px; Remove Welcome Back
+}
+
+.loginTop p {
+  margin-top: 1rem;
+}
+
+.form-signin label {
+  letter-spacing: 0.5px;
+  color: #7f8fa4;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.form-signin input {
+  height: 46px;
+  border: solid 1px #dfe3e9;
+  letter-spacing: 0.5px;
+}
+
+.form-signin select {
+  height: 46px;
+  background-image: linear-gradient(to top, #f2f4f7, #ffffff);
+  border: solid 1px #ced0da;
+  letter-spacing: 0.5px;
+}
+
+.form-signin .rememberMe {
+  width: 98px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: #7f8fa4;
+}
+
+.custom-control {
+  margin: 10px 0px;
+}
+
+.custom-control-label::before,
+.custom-control-label::after {
+  top: 13px;
+  width: 20px;
+  height: 20px;
+  margin-top: 0.4%;
+  vertical-align: middle;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+  border-radius: 4px;
+  -webkit-animation: pulse 0.7s ease-in-out forwards;
+  animation: pulse 0.7s ease-in-out forwards;
+  background-color: #01c0c8; // background-color: #1b232e;
+}
+
+.loginBtn {
+  border-radius: 4px;
+  background-color: #01c0c8;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1.6px;
+  text-align: center;
+  color: #ffffff;
+  padding: 10px 0px
+}
+
+.loginBtn:focus {
+  -webkit-animation: pulse 0.7s ease-in-out forwards;
+  animation: pulse 0.7s ease-in-out forwards;
+}
+
+
+
+.errorMessage {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  border-radius: 4px;
+  line-height: 30px;
+  color: #d0021b;
+  -ms-flex-line-pack: center;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+@media screen and (max-width: 992px) {
+  .bgImage {
+    background-image: url(/assets/img/background.png);
+    background-position: 11px -6px;
+    background-size: cover;
+    height: 100%;
+    min-height: 800px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bgImage {
+    background-image: url(/assets/img/background.png);
+    background-position: 11px -6px;
+    background-size: cover;
+    height: 100%;
+    min-height: 800px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .bgImage {
+    background-image: url(/assets/img/background.png);
+    background-position: 0px 0px;
+    background-size: cover;
+    height: 100%;
+    min-height: 1371px;
+  }
+}
+
+.isInvalid ::placeholder {
+  color: #d0021b;
+  opacity: 1;
+}
+
+.isInvalid input,
+.isInvalid select {
+  /* border: transparent; */
+  border: 1px solid #d0021b !important;
+  color: #d0021b;
+}
+
+.error-message {
+  position: absolute;
+  color: #d0021b;
+  float: left;
+  margin-left: 0px;
+  font-size: 12px;
+}
+.forgotText{    
+  margin-top: 25px;
+margin-left: 31%;
+letter-spacing: 0.5px;
+
+font-size: 14px;
+float: right;
+// margin-bottom: 15px;
+}
+.forgotText a,
+.accountAlready  a{
+  color: #7f8fa4 ;
+  
+  float: right;
+}
+
+.forgotText  a:hover,
+.accountAlready  a:hover  {   
+  color: #01c0c8;
+
+}
+.accountAlready{
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  color: #7f8fa4 ;
+}
+.roleClass{
+  margin-bottom: 0px !important; 
+}

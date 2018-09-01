@@ -1,0 +1,27 @@
+<div class="dHeader">
+  <p class="mt-3"> Alert!
+    <img (click)=" closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container">
+
+    <div class="col-md">
+
+      <div class="row customRow">
+        <p class="confirmDialog" *ngIf="data.type === 'delete'"> Are you sure you want to delete the {{data.user ? (data.user === 'siteCoordinator' ? 'Site Coordinator' : (data.user === 'irb' ? 'IRB' : (data.user === 'cro' ? 'CRO' : (data.user === 'sponsor' ? 'Sponsor' : data.user ) ) ) ): 'User'}}? </p>
+        <!-- <p class="confirmDialog" *ngIf="data.type === 'logout'"> Are you sure you want to {{data.type ? (data.type === 'siteCoordinator' ? 'Site Coordinator' : data.type) : 'User'}}? </p> -->
+      </div>
+    </div>
+
+
+
+
+<div class="dialogButton">
+  <div class="col-md">
+    <div class="form-group pull-right">
+      <button  class="checkButtons  yesButton col-md"  (click)="action('yes')">Yes</button>
+      <button  class="checkButtons  noButton col-md" (click)="action('no')">No</button>
+    </div>
+  </div>
+</div>
+</div>

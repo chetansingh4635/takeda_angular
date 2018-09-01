@@ -1,0 +1,294 @@
+<div class="tm-group container-fluid">
+  <div class="d-md-flex">
+    <input type="text" class="form-control search-field" *ngIf="currentTabIndex === 0" placeholder="Search" [(ngModel)]="adminFilter"
+    />
+    <input type="text" class="form-control search-field" *ngIf="currentTabIndex === 1" placeholder="Search" [(ngModel)]="sponsorFilter"
+    />
+    <input type="text" class="form-control search-field" *ngIf="currentTabIndex === 2" placeholder="Search" [(ngModel)]="adminFilter"
+    />
+    <input type="text" class="form-control search-field" *ngIf="currentTabIndex === 3" placeholder="Search" [(ngModel)]="sponsorFilter"
+    />
+    <button class="search-button" mat-raised-button>
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <button class="add-button" mat-raised-button (click)="openDialog()">+Add</button>
+  </div>
+  <mat-tab-group class="tm-tab" #userManagementTab (selectedTabChange)="tabChanged($event)">
+    <mat-tab class="admin-tab" label="CRO">
+      <div class="container-fluid">
+        <!-- <div class="row">
+          <div class="col">
+            <div class="row">-->
+        <table data-page-length='9' class="table table-striped" [mfSortBy]="sortType" (mfSortByChange)="changeOrder($event)" [mfData]="croData | dataFilter : adminFilter "
+          #mfCro="mfDataTable" [mfRowsOnPage]="5">
+          <thead>
+            <tr>
+              <th class="table-content">
+                <mfDefaultSorter by="serialNo">Serial No.</mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="typeOfCro">Type of CRO
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="croName">CRO Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="croId">CRO ID
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="croLocation">CRO Location
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="studySiteName">Study Site Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="studySiteLocation">Study Site Location
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="action">Action</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mfCro.data ; let i = index">
+              <td class="table-content">{{i+1}}</td>
+              <td class="table-content">{{item.typeOfCro}}</td>
+              <td class="table-content">{{item.croName}}</td>
+              <td class="table-content">{{item.croId}}</td>
+              <td class="table-content">{{item.croLocation}}</td>
+              <td class="table-content">{{item.studySiteName}}</td>
+              <td class="table-content">{{item.studySiteLocation}}</td>
+              <td class="table-content">
+                <i class="fa fa-pencil fa-2x" (click)="editUser(item,i)" aria-hidden="true"></i>
+                <i class="fa fa-trash fa-2x" (click)="deleteUser(i)" aria-hidden="true"></i>
+              </td>
+            </tr>
+            <tr class="blank_row" *ngFor="let item of arrayOne(mfCro.data.length); let i = index;">
+              <td class="table-content" colspan="8"></td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+                  <tr>
+                    <td >
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot> -->
+        </table>
+        <!-- </div>
+          </div>
+        </div> -->
+      </div>
+    </mat-tab>
+    <mat-tab class="admin-tab" label="PI">
+      <div class="container-fluid">
+        <!-- <div class="row">
+          <div class="col">
+            <div class="row">-->
+        <table data-page-length='9' class="table table-striped" [mfSortBy]="sortType" (mfSortByChange)="changeOrder($event)" [mfData]="piData | dataFilter : adminFilter "
+          #mfPI="mfDataTable" [mfRowsOnPage]="5">
+          <thead>
+            <tr>
+              <th class="table-content">
+                <mfDefaultSorter by="serialNo">Serial No.</mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="typeOfPi">Type of PI
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="piName">PI Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="piId">PI ID
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="piLocation">PI Location
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="studySiteName">Study Site Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="studySiteLocation">Study Site Location
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="action">Action</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mfPI.data ; let i = index">
+              <td class="table-content">{{i+1}}</td>
+              <td class="table-content">{{item.typeOfPi}}</td>
+              <td class="table-content">{{item.piName}}</td>
+              <td class="table-content">{{item.piId}}</td>
+              <td class="table-content">{{item.piLocation}}</td>
+              <td class="table-content">{{item.studySiteName}}</td>
+              <td class="table-content">{{item.studySiteLocation}}</td>
+              <td class="table-content">
+                <i class="fa fa-pencil fa-2x" (click)="editUser(item,i)" aria-hidden="true"></i>
+                <i class="fa fa-trash fa-2x" (click)="deleteUser(i)" aria-hidden="true"></i>
+              </td>
+            </tr>
+            <tr class="blank_row" *ngFor="let item of arrayOne(mfPI.data.length); let i = index;">
+              <td class="table-content" colspan="8"></td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+                  <tr>
+                    <td >
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot> -->
+        </table>
+        <!-- </div>
+          </div>
+        </div> -->
+      </div>
+    </mat-tab>
+    <mat-tab class="admin-tab" label="Regulatory Body">
+      <div class="container-fluid">
+        <!-- <div class="row">
+          <div class="col">
+            <div class="row">-->
+        <table data-page-length='9' class="table table-striped" [mfSortBy]="sortType" (mfSortByChange)="changeOrder($event)" [mfData]="regulatoryBodyData | dataFilter : adminFilter "
+          #mfRegulatoryBody="mfDataTable" [mfRowsOnPage]="5">
+          <thead>
+            <tr>
+              <th class="table-content">
+                <mfDefaultSorter by="serialNo">Serial No.</mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="regulatoryBodyType">Regulatory Body Type
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="regulatoryBodyId">Regulatory Body Id
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="regulatoryBodyName">Regulatory Body Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="action">Action</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mfRegulatoryBody.data ; let i = index">
+              <td class="table-content">{{i+1}}</td>
+              <td class="table-content">{{item.regulatoryBodyType}}</td>
+              <td class="table-content">{{item.regulatoryBodyId}}</td>
+              <td class="table-content">{{item.regulatoryBodyName}}</td>
+              <td class="table-content">
+                <i class="fa fa-pencil fa-2x" (click)="editUser(item,i)" aria-hidden="true"></i>
+                <i class="fa fa-trash fa-2x" (click)="deleteUser(i)" aria-hidden="true"></i>
+              </td>
+            </tr>
+            <tr class="blank_row" *ngFor="let item of arrayOne(mfRegulatoryBody.data.length); let i = index;">
+              <td class="table-content" colspan="8"></td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+                  <tr>
+                    <td >
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot> -->
+        </table>
+        <!-- </div>
+          </div>
+        </div> -->
+      </div>
+    </mat-tab>
+    <mat-tab class="sponsor-tab" mat-selcted="true" label="Sponsor">
+      <div class="container-fluid">
+        <!-- <div class="row">
+          <div class="col">
+            <div class="row">-->
+        <table class="table table-striped" [mfData]="sponsorData | dataFilter : sponsorFilter  " #mfSponsor="mfDataTable" [mfRowsOnPage]="5">
+          <thead>
+            <tr>
+              <th class="table-content">
+                <mfDefaultSorter by="serialNo">Serial No.</mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="sponsorOrganisationName">Sponsor Organization Name
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="emailId">E-mail ID
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="location">Location
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </mfDefaultSorter>
+              </th>
+              <th class="table-content">
+                <mfDefaultSorter by="action">Action</mfDefaultSorter>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mfSponsor.data; let i = index ;">
+              <td class="table-content">{{i+1}}</td>
+              <td class="table-content">{{item.sponsorName}}</td>
+              <td class="table-content">{{item.emailId}}</td>
+              <td class="table-content">{{item.city}}</td>
+              <td class="table-content">
+                <i class="fa fa-pencil fa-2x" (click)="editUser(item,i)" aria-hidden="true"></i>
+                <i class="fa fa-trash fa-2x" (click)="deleteUser(i)" aria-hidden="true"></i>
+              </td>
+            </tr>
+            <tr class="blank_row" *ngFor="let item of arrayOne(mfSponsor.data.length); let i = index;">
+              <td class="table-content" colspan="8"></td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+                  <tr>
+                    <td >
+                      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot> -->
+        </table>
+        <!-- </div>
+          </div>
+        </div> -->
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>

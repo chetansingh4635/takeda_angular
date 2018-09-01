@@ -1,0 +1,114 @@
+
+<div class="container-fluid cm-doc">
+  <div class="row">
+    <div class="cm_filter">
+      <h3> Subject Name: <strong>{{subjectName}}</strong> </h3>
+      <p> <span> {{subjectId}} </span> </p>
+    </div>
+
+    <div class="col">
+      <div class="text-right">
+        <div class="search">
+          <div class="form-group">
+            <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"/>
+            <span class="align-icon">
+              <img class="" src="./assets/img/icons/search.svg" alt="search">
+            </span>
+          </div>
+        </div>
+        <button  class="btn btn-info addBtn alignBtn" (click)="addAndUpdate()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="dataTable" class="dataTable mt-4 row table-responsive">
+    <table class="table" [mfData]="" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <thead class="cust-theme-heading table-content">
+        <tr>
+          <th scope="col"> Visit No. </th>
+          <th scope="col">Visit Description </th>
+          <th scope="col"> Set Visit </th>
+          <th scope="col"> Verification Check </th>
+         
+        </tr>
+      </thead>
+      <tbody class='cust-theme-body' *ngIf="!isView">
+        <tr *ngFor="let visit of visitsData; let i=index">
+          <td class="table-content"> {{i+1}} </td>
+          <td class="table-content"> {{visit.visitProcedure}}</td>
+          <td class="table-content"> 
+            <div class="form-group">
+              <angular2-date-picker [(ngModel)]="visit.visitDate"  [settings]="settings"></angular2-date-picker> 
+            </div>
+          </td>
+          <td class="table-content"> <mat-checkbox (change)="updateVisit($event,visit)"> </mat-checkbox> </td>
+    
+        </tr>              
+      </tbody>
+      <tbody class='cust-theme-body'  *ngIf="isView">
+        <tr *ngFor="let visit of visitsData; let i=index">
+          <td class="table-content"> {{i+1}} </td>
+          <td class="table-content"> {{visit.visitProcedure}}</td>
+          <td class="table-content"> 
+            <div class="form-group" *ngIf="isView">
+              {{visit.visitDate ? this.datePipe.transform(visit.visitDate, 'MM-dd-yyyy, HH:MM') : 'NA'}}
+            </div>
+          </td>
+          <td class="table-content"> <mat-checkbox (change)="updateVisit($event,visit)"> </mat-checkbox> </td>
+    
+        </tr>              
+      </tbody>
+    </table>
+
+  </div>
+  <div class="row tblPaginationContainer">
+    <div class="col">
+      <nav aria-label="Page navigation example">
+           </nav>
+    </div>
+  </div>
+  <div class="row tblPaginationContainer">
+    <div class="col">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" *ngIf="pager.pages && pager.pages.length">
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(1)">
+              <i class="fa fa-step-backward" aria-hidden="true" alt="First"></i>
+              <span class="sr-only">First</span>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+            <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+              <i class="fa fa-caret-left" aria-hidden="true"  alt="Previous"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a class="page-link textColor" (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li class="page-item" *ngIf="(pager.totalPages - pager.startPage) > 5 ">
+            <a class="page-link textColor" (click)="setPage(pager.startPage + 5)">...</a>
+          </li>
+          <li class="page-item" *ngIf="(pager.totalPages - pager.startPage) > 5">
+            <a class="page-link textColor" (click)="setPage(pager.totalPages)">{{pager.totalPages}}</a>
+          </li>
+
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+              <i class="fa fa-caret-right" aria-hidden="true" alt="Next"></i>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a class="page-link" (click)="setPage(pager.totalPages)">
+              <i class="fa fa-step-forward" aria-hidden="true" alt="Last"></i>
+              <span class="sr-only">Last</span>
+            </a>
+
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="dHeader">
+  <p class="mt-3"> {{data.type === 'ASSIGN' ? 'Assign Site' : 'Qualify Subject'}} {{' - ' + data.subjectName}}
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+
+<div class="dialog-container">
+  <form [formGroup]="form" novalidate>
+    <div class="col-md mt-4 mb-4" *ngIf="data.type !== 'ASSIGN'" [ngClass]="{'isInvalid' :(form['controls'].assign.errors?.required && form['controls'].assign.touched && !form['controls'].assign.pristine) || (form['controls'].assign.errors?.required && submitted)}">
+      <div class="form-group row custominput ">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline1" formControlName="assign" name="assign" value="assignNow" (change) = "onChange($event)" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline1">Assign Now</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline2" formControlName="assign" name="assign" value="assignLater" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline2">Assign Later</label>
+        </div>
+        <span class="row input-padding error-message" *ngIf="(form['controls'].assign.errors?.required && form['controls'].assign.touched ) || (form['controls'].assign.errors?.required && submitted)">
+          *Please select Assign Status
+        </span>
+      </div>
+    </div>
+    <div class="col-md" *ngIf="form['controls'].assign.value !== 'assignLater'" [ngClass]="{'isInvalid' :(form['controls'].siteName.errors?.required && form['controls'].siteName.touched) || (form['controls'].siteName.errors?.required && submitted)}">
+        <div class="form-group row ">
+  
+          <label for="siteName" class="col-form-label">Site Name</label>
+        </div>
+        <div class="row">
+          <!-- <select class="form-control" formControlName="siteName" #sName required="required" (change)="siteIdAndNameChanged(sName.value, 'name')">
+                  <option value="" [selected]="true" [hidden]="true">Select Site Name</option>
+                  <option *ngFor="let site of sitesList">{{site.siteName}}</option>
+                </select> -->
+          <input type="text" list="siteNAME" class="form-control custominput arrowRight" placeholder="Select Site Name" #sName required="required"
+            formControlName="siteName" (change)="siteIdAndNameChanged(sName.value, 'name')">
+          <datalist id="siteNAME">
+            <option *ngFor="let site of sitesList">{{site.siteName}}</option>
+          </datalist>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].siteName.errors?.required && form['controls'].siteName.touched) || (form['controls'].siteName.errors?.required && submitted)">
+            *Please select valid Site Name
+          </span>
+        </div>
+      </div>
+    <div class="col-md" *ngIf="form['controls'].assign.value !== 'assignLater'" [ngClass]="{'isInvalid' :(form['controls'].siteId.errors?.required && form['controls'].siteId.touched) || (form['controls'].siteId.errors?.required && submitted)}">
+      <div class="form-group row">
+        <label for="siteId" class="col-form-label">Site ID</label>
+      </div>
+      <div class="row">
+
+        <input type="text" list="siteID" class="form-control custominput arrowRight" formControlName="siteId" placeholder="Select Site ID"
+          #sId required="required" (change)="siteIdAndNameChanged(sId.value,'id')">
+        <datalist id="siteID">
+          <option *ngFor="let site of sitesList">{{site.siteId}}</option>
+        </datalist>
+        <!-- <select disable class="form-control" formControlName="siteID" #sId required="required" (change)="siteIdAndNameChanged(sId.value, 'id')">
+          <option value="" [selected]="true" [hidden]="true">Select Site Id</option>
+          <option *ngFor="let site of sitesList">{{site.siteId}}</option>
+        </select> -->
+        <span class="row input-padding error-message" *ngIf="(form['controls'].siteId.errors?.required && form['controls'].siteId.touched) || (form['controls'].siteId.errors?.required && submitted)">
+          *Please select valid Site ID
+        </span>
+      </div>
+    </div>
+
+  </form>
+
+
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="addSubject()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+/*Page Under Construction Image */
+
+.PageUnderConstruction {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.PageUnderConstruction .ConstImage {
+    padding: 45px 0px;
+}
+
+
+/* =================================================== */
+
+/* 1. Trial Management initiate-trial.component.css  */
+
+/* 2. Module Component module-component.css */
+
+/* 3. Style.css main Media Query, Bootstrap Style change */
+
+/* ==================================================== */
+
+.parentFilter {
+    display: flex;
+    padding: 0px 7px;
+    margin-top: 7px;
+    /* width: 187px; */
+    width: 100%
+}
+
+.spanFilter {
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    color: #1e2733;
+    margin: 1px 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-control:disabled{
+        background-color: #fff;
+        opacity: 0.65;
+        color: #354052;;
+
+}
+
+.mat-pseudo-checkbox-checked::after {
+width: 14px !important;
+height: 7px !important;
+}
+.wc-date-row , .wc-my-sec{
+    display: none !important;
+}
+
+.wc-banner, .wc-details, .year-title{
+    background: #28bfc7 !important;
+}
+.calendar-days{
+    color: #28bfc7 !important;
+}
+.calendar-days span:hover{
+    background: #28bfc7 !important;
+}
+.selected-day > span {
+    background: #28bfc7 !important;
+}
+.today > span {
+    border: 1px solid #28bfc7 !important;
+}
+.cal-util > .ok {
+    color: #28bfc7 !important;
+}
+.cal-util > .ok {
+    color: #28bfc7 !important;
+}
+
+.banner-true > .time-view {
+    top: 108px !important;
+}
+.time-view {
+    border-top: 1px solid #28bfc7 !important;
+}
+.time-view .time, .time-view .time input {
+    color: #28bfc7 !important;
+}
+
+.cuppa-btn-group .button {
+    background: white !important;
+    border: 1px solid #28bfc7 !important;
+}
+.cuppa-btn-group > .active {
+    background: #28bfc7 !important;
+}
+.cuppa-btn-group > .button {
+    border: 1px solid #28bfc7 !important;
+    color: white !important;
+    background: #28bfc7 !important;
+}
+.time-view-btn > button {
+    background: #28bfc7 !important;
+    border : #28bfc7 !important;
+}
+.wc-date-container > i {
+    color: #28bfc7 !important;
+}
+/* .wc-date-container[_ngcontent-c4] {
+    border: 1px solid #28bfc7 !important;
+} */
+.wc-date-container  {
+    color: #28bfc7 !important;
+    border: 1px solid #28bfc7 !important;
+    border-radius: 4px !important;
+}
+.wc-date-container> span {
+    color: #28bfc7 !important;
+}
+.winkel-calendar{
+    min-width: 125px !important;
+}
+.cal-util > .ok {
+    display: none !important;
+}
+
+.wc-date-popover{
+    left: -55px !important;
+}

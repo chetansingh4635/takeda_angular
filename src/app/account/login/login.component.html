@@ -1,0 +1,71 @@
+<div class="centerDiv">
+  <div class="wrapper">
+    <div class="loginLogo">
+      <img src="./assets/img/logo.png">
+    </div>
+    <form [formGroup]="loginForm" novalidate class="form-signin">
+      <div class="loginTop">
+        <!-- <span class="welcome">Welcome back!</span> -->
+        <p>
+          Login to continue
+        </p>
+      </div>
+      <div class="loginForm ">
+        <div class="form-group" [ngClass]="{'isInvalid' :((loginForm['controls'].emailId.errors?.required && loginForm['controls'].emailId.touched)  ||(loginForm['controls'].emailId.hasError('pattern') && loginForm['controls'].emailId.touched)|| (loginForm['controls'].emailId.errors?.required&& submitted))}">
+          <label for="emailId">Email ID</label>
+          <input type="email" class="form-control" name="emailId" formControlName="emailId" [pattern]="pattern" (keyup.enter)="login();"
+            placeholder=" Email ID">
+          <span class="row input-padding error-message" *ngIf="((loginForm['controls'].emailId.errors?.required && loginForm['controls'].emailId.touched)  ||(loginForm['controls'].emailId.hasError('pattern') && loginForm['controls'].emailId.touched)|| (loginForm['controls'].emailId.errors?.required&& submitted))">
+            *Please enter valid Email ID
+          </span>
+        </div>
+        <div class="form-group" [ngClass]="{'isInvalid' :(loginForm['controls'].password.errors?.required && loginForm['controls'].password.touched) || (loginForm['controls'].password.errors?.required && submitted) || (loginForm['controls'].password.hasError('pattern') && loginForm['controls'].password.touched)}">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" formControlName="password" [pattern]="passwordPattern" (keyup.enter)="login();"
+            placeholder="Password">
+          <span class="row input-padding error-message" *ngIf="(loginForm['controls'].password.errors?.required && loginForm['controls'].password.touched) || (loginForm['controls'].password.errors?.required && submitted)">
+            *Please enter valid Password
+          </span>
+          <span class="row input-padding error-message" *ngIf="(loginForm['controls'].password.hasError('pattern') && loginForm['controls'].password.touched)">
+            *Please enter password of minimum 8 and maximum 16 characters
+          </span>
+        </div>
+        <div class="form-group roleClass" [ngClass]="{'isInvalid' :(loginForm['controls'].role.errors?.required && loginForm['controls'].role.touched) || (loginForm['controls'].role.errors?.required && submitted)}">
+          <label>Select Role</label>
+          <!-- {{selectedRole}} -->
+          <select formControlName="role" class="form-control selectRoleddn" [(ngModel)]="selectedRole">
+            <option value="null" selected disabled hidden> Select role </option>
+            <option *ngFor="let ulist of tempRoleListData" [ngValue]="ulist._id">{{ulist.roleName}}</option>
+            <!-- <option>Sponsor</option>
+            <option selected>Admin</option>
+            <option>CRO</option> -->
+          </select>
+          <span class="row input-padding error-message" *ngIf="(loginForm['controls'].role.errors?.required && loginForm['controls'].role.touched) || (loginForm['controls'].role.errors?.required && submitted)">
+            *Role required
+          </span>
+        </div>
+
+        <div class="input-group">
+        <div class="custom-control form-control-lg custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe" formControlName="isChecked">
+          <label class="custom-control-label" for="rememberMe">Remember Me</label>
+        </div>
+        <div class="forgotText">
+            <a routerLink="/forgotPassword">
+              Forgot Password?
+            </a>
+          </div>
+          </div>
+        <div class="form-group ">
+          <button type="submit" class="btn btn-default loginBtn" (click)="login();">
+            Login
+            <i *ngIf="spiner" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+          </button>
+        </div>
+        <!-- <div class="form-group errorMessage">
+          {{errMessage}}
+        </div> -->
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="dHeader">
+  <p class="mt-3">{{ data.isEdit ?'Edit User': 'Add User'}}
+    <img (click)="closeDialog()" class="cancel-icon" src="./assets/img/icons/close-button.svg" alt="">
+  </p>
+</div>
+<div class="dialog-container">
+  <form [formGroup]="form" novalidate>
+    <div class="d-flex flex-row row">
+      <div class="col-md ">
+        <div class="form-group row">
+          <label for="role" class="col-form-label row">Select User Role</label>
+        </div>
+        <div class="row">
+          <select class="form-control arrowRight" formControlName="roleId" untouched>
+            <!-- <option class="PlaceholderOption" value="" [selected]="true" [hidden]="true">Select Role</option> -->
+            <option *ngFor="let ulist of tempRoleListData" [ngValue]="ulist._id">{{ulist.roleName}}</option>
+          </select>
+
+          <span class="row input-padding error-message" *ngIf="(form['controls'].roleId.errors?.required && form['controls'].roleId.touched )  || (form['controls'].roleId.errors?.required && submitted)">
+            *Please select valid User Role
+          </span>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="form['controls'].roleId.value === constants.adminId " [ngClass]="{'isInvalid' :((form['controls'].nickName.errors?.required && form['controls'].nickName.touched) || (form['controls'].nickName.errors?.required && submitted) || (form['controls'].nickName.hasError('pattern') && form['controls'].nickName.touched))}">
+        <div class="form-group row">
+          <label for="nickName" class="col-form-label">Name</label>
+        </div>
+        <div class="row">
+          <input type="text" class="form-control mb-4" name="nickName" [pattern]="namePattern" formControlName="nickName" placeholder=" Name">
+          <span class="row input-padding error-message" *ngIf="((form['controls'].nickName.errors?.required && form['controls'].nickName.touched) || (form['controls'].nickName.errors?.required && submitted))">
+            *Please enter valid Name with characters only
+          </span>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].nickName.hasError('pattern') && form['controls'].nickName.touched)">
+            *Please enter valid Name with minimum 3 and maximum 20 characters only
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md" *ngIf="form['controls'].roleId.value === constants.sponsorId" [ngClass]="{'isInvalid' :((form['controls'].orgName.errors?.required && form['controls'].orgName.touched) || (form['controls'].orgName.errors?.required && submitted) || (form['controls'].orgName.hasError('pattern') && form['controls'].orgName.touched))}">
+        <div class="form-group row">
+          <label for="orgName" class="col-form-label">Sponsor Organization Name</label>
+        </div>
+        <div class="row">
+          <input type="text" class="form-control mb-4" name="orgName" [pattern]="namePattern" formControlName="orgName" placeholder="Enter Sponsor Organization Name">
+          <span class="row input-padding error-message" *ngIf="((form['controls'].orgName.errors?.required && form['controls'].orgName.touched) || (form['controls'].orgName.errors?.required && submitted))">
+            *Please enter valid Sponsor Organization Name with characters only
+          </span>
+          <span class="row input-padding error-message" *ngIf="(form['controls'].orgName.hasError('pattern') && form['controls'].orgName.touched)">
+            *Please enter valid Sponsor Organization Name with minimum 3 and maximum 20 characters only
+          </span>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="d-flex flex-row row">
+      <div class="col-md" [ngClass]="{'isInvalid' :(form['controls'].location.errors?.required && form['controls'].location.touched) || (form['controls'].location.errors?.required && submitted)}">
+        <div class="row ">
+
+          <label for="location" class="col-form-label">Location</label>
+        </div>
+        <div class="row">
+          <input type="text" list="location" class="form-control mb-4 arrowRight" placeholder="Select Location" required="required"
+            formControlName="location">
+          <datalist id="location">
+            <option *ngFor="let loc of locationListData">{{loc.location}}</option>
+          </datalist>
+          <!-- <select  class="form-control" formControlName="location"  required="required" >
+            <option value="" [selected]="true" [hidden]="true">Select Loaction</option>
+            <option *ngFor="let loc of locationListData">{{loc.location}}</option>
+          </select> -->
+          <span class="row input-padding error-message" *ngIf="(form['controls'].location.errors?.required && form['controls'].location.touched) || (form['controls'].location.errors?.required && submitted)">
+            *Please select valid Location
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md" *ngIf="form['controls'].roleId.value === constants.adminId" [ngClass]="{'isInvalid' :((form['controls'].email.errors?.required && form['controls'].email.touched)  ||(form['controls'].email.hasError('pattern') && form['controls'].email.touched)|| (form['controls'].email.errors?.required && submitted))}">
+        <div class=" row">
+          <label for="email" class="col-form-label">Email ID</label>
+        </div>
+        <div class="row">
+          <input type="email" class="form-control mb-4" name="email" formControlName="email" [pattern]="pattern" placeholder=" Email ID">
+          <span class="row input-padding error-message" *ngIf="((form['controls'].email.errors?.required && form['controls'].email.touched)  ||(form['controls'].email.hasError('pattern') && form['controls'].email.touched)|| (form['controls'].email.errors?.required && submitted))">
+            *Please enter valid Email ID
+          </span>
+        </div>
+      </div>
+      <div class = "col-md" *ngIf="form['controls'].roleId.value === constants.sponsorId"> </div>
+    </div>
+  </form>
+
+
+  <div class="d-flex flex-row row dialogButton">
+    <div class="col-md">
+      <div class="form-group row ">
+        <button mat-raised-button class="primary saveButton col-md" flex-row-reverse (click)="addUser()">{{ data.isEdit ?'Update': 'Add'}}</button>
+        <!-- <button mat-raised-button class="primary saveButton col-md" *ngIf="data.isEdit" flex-row-reverse (click)="editUser()">Update</button> -->
+      </div>
+    </div>
+  </div>
+</div>

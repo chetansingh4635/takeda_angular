@@ -1,0 +1,443 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "./assets/css/font-awesome.css";
+@import "../node_modules/angular2-toaster/toaster.css";
+@import "./assets/css/style.css";
+@import "./assets/css/dialog.css";
+@import "./assets/css/dataTable.css";
+@import "./assets/css/temp.css";
+/* Common CSS Start */
+
+html,
+body {
+  height: 100%;
+  min-height: 615px;
+  width: 100%;
+  min-width: 992px;
+  font-family: sans-serif;
+}
+
+a,
+a:hover {
+  color: #242c36;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:active {
+  background-color: transparent;
+}
+
+/* Image Selection Disable */
+
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pdf {
+  cursor: pointer;
+}
+
+.search-field {
+  padding: 0.375rem 1rem;
+  border: solid 1px #dfe3e9;
+}
+
+.search-field::placeholder {
+  opacity: 0.5;
+  font-size: 14px;
+  /* line-height: 1.36; */
+  color: #354052;
+  /* padding: 9px 10px; */
+}
+
+/* Common CSS  End */
+
+/* ==================================================================================== */
+
+/* Login Background Image CSS Start */
+
+.bgImage {
+  background-image: url('/assets/img/background.png');
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  min-height: 800px;
+}
+
+/* Login Background Image CSS End */
+
+/* ==================================================================================== */
+
+/* Spash Screen Background Image CSS Start */
+
+.splash {
+  background-image: url('/assets/img/background_splash.svg');
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+/* Spash Screen Background Image CSS End */
+
+/* ==================================================================================== */
+
+/* Spash Screen Logo Image CSS and Animation Start */
+
+.splash>div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  object-fit: contain;
+  -webkit-animation: 3s ease 0s normal forwards 1 fadein;
+  animation: 3s ease 0s normal forwards 1 fadein;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.05;
+  }
+}
+
+/* Spash Screen Logo Image CSS and Animation Start */
+
+/* ==================================================================================== */
+
+/* Data Loader Spinner Start */
+
+/* Absolute Center Spinner */
+
+.dataLoader {
+  position: fixed;
+  z-index: 9999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+
+.dataLoader:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+
+.dataLoader:not(:required) {
+  /* hide "dataLoader..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.dataLoader:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 20px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: #28bfc7 1.5em 0 0 0, #28bfc7 1.1em 1.1em 0 0, #28bfc7 0 1.5em 0 0, #28bfc7 -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, #28bfc7 0 -1.5em 0 0, #28bfc7 1.1em -1.1em 0 0;
+  box-shadow: #28bfc7 1.5em 0 0 0, #28bfc7 1.1em 1.1em 0 0, #28bfc7 0 1.5em 0 0, #28bfc7 -1.1em 1.1em 0 0, #28bfc7 -1.5em 0 0 0, #28bfc7 -1.1em -1.1em 0 0, #28bfc7 0 -1.5em 0 0, #28bfc7 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* Data Loader Spinner Start */
+
+/* ==================================================================================== */
+
+/*Cusytom Toster Style Start */
+
+.toast-success {
+  background-color: #e7fbfc !important;
+  color: #01c0c8 !important;
+  font-size: 16px;
+}
+
+
+/* .toast-warning{
+  color: white;
+  font-size: 16px;
+} */
+.toast-message {
+  color: #354052;
+  font-size: 14px;
+}
+
+.custom-toast>div {
+  margin: 0 0 !important;
+  border-radius: 6px;
+  box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.15);
+  border: solid 3px rgba(1, 192, 200, 0.3);
+}
+.toaster-icon {
+  margin: -1px 5px;
+}
+.custom-toast .icon-success {
+  width: 35px;
+  height: 100%;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAApCAYAAABKvBuPAAAAAXNSR0IArs4c6QAABLRJREFUWAm9Vk1oXFUUfvfOtCZpSlWKEEVbta1gFgUHlG6MUmlTkxr/6GJ02WW7KqjL6KYG6sZFIAtdFDeClUBUkP4k0mKqUAK6EBcWtEoI7dQkTZOmyfR678v7bs47795330zGBibnO9855zvfvfMmGRHdnx/RxBqVN9OMYJ4eaq3WzRyilQtaqYUL4NEeoFXLWqXDjbry2Lx0VRrk7qdpa63Zpa2cs2+/dRUGqoiBIj2+VY3OFj2E03ijy7jpjc4bvdABFH/Gm11q5vDiB0GOutg5OLhZjk+eFj9cnpUTk8fQQGLIh6DGQ81E10KYsQQBqCHGpe7BwdKfPb1fKCHe0fe6VUXiPV1w7XZxVh7Gc5ts9zpImVmn7a1TPfSKSqUif+vp/Ux3vYUZodSlBNMZlL0Rxr0NrAATlAZHF7u4aOrUp8P6U/UuGf5ly/QN+qhQDdPGczvaiHGXCOUMxgsLkAt5YfITJUpHUdCPye/t1/7pvVU9PJvMoUQ1wWViKWFCzbwu2s989+jeB7csTl+5YiRo3WC8Ynk5/uNHSsoTcbL262rb9euvLFVfnyEc1SB0StvyqQWWTQMuKOT45SH9lp/Qt/ZT5/TV/lvVqvfW5LlLH6hy+UMi+ffmf2++tPzGq38lHP3TB4yIMZ5HoUclY9ooKSmqsaKIXljoeuqbbcPDW5MNqYuQ5y4eT5lW0cymmzcOaNPXdD+0EROJRJlmDpxnnAvaXNTrX1stbX7+2edGH3r/4w7LaVPy+4mjqrzplOVUVCvXZg7dfbP/D8tlgd2RLaUZ84z7mjmPXHQ9+fiFhZ1PV/TorkRux51dOyrbS+rM4tTUvdLZiap6oH3EaqtorlyrHVp5+/CvllsbhGYiUzyYQd8w5YFt3D401FZ7/sWxSIgeu06pMbm89NW9to7PNYcP/kJprta3OtD3s+boswocikYePQbHP8YIzCSU5V05euO47eTJzvl9L3+rG/fRZotFtFSanRtYHTh40XLrJmDGRGDTBswjkVi7FZihBcoBZ+Ly+fMrnd3PjK489sR+ff4uKqDfibtyfu5I/bWD4yk+P8k1S0eNGRjiPHLUvbFjZOThpT17z2ql7mRoVS7MV+v9B8YgQqIxxw36cjOGGpGI4q+1MEQLlAN2Rcu1j5x+5M6e3V/qe9gtF28fr/ftH3UshYmi0XhCL/W3YeNGzJjHAai4C8MEjRSbGeQcU73M93FabATTZb459PDo68/lff+AIG6GKc4T8/UZHrWiMbi36D8gPAqhWORgIfN5GvZA5VBXwTrM4GB0DDW7VAPK0V7gUN1+qFwLOYecR7MMHBbzSI24sIvjGia3fViIyJspXwSbefTZJYkozYtg7oXO2O8TWMabOU9zis0cz6GVWqhJmvswZr0RyxBdjbxGc4pds5TLM0lrdAY4U6eLKcYAIq/x3PS5uMxC3cc5nmMnorNOl1GMIRpddRdHZyh2GXBxoZm4zhfznIoYHKrzfl8eMmzmcntcRlwcN1Ckh88EzZCBXNOmz2fAxxNtC0O9QRNWaQ0U6s9bmldju1qWFjJttoXMheotc6yFCpsuYhzG/s8DNGR4o4aaPUhTJmGWxv8APh4lIS9m4bYAAAAASUVORK5CYII=') !important;
+  margin: 5px 15px !important;
+}
+
+/*Cusytom Toster Style End */
+
+/* ==================================================================================== */
+
+/* override bootstrap */
+
+ .itpHeader {
+  background: #fff;
+  /* margin: -14px -35px 13px -31px; */
+  margin: -12px -40px 10px -40px;
+  padding: 5px 35px;
+}
+.itpHeaderNew{
+  background: #fff;
+  margin: -19px -40px 10px -40px !important;
+  padding: 2px 35px;
+}    
+ ul.nav-pills {
+  border: solid 1px #ced0da;
+  padding: 5px 5px;
+  border-radius: 5px;
+  background: #fff;
+  margin: 10px 0px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  color: #354052;
+}
+.faqComp ul.nav-pills{
+  width: 40%;
+  }
+  .floatingDiv ul.nav-pills{
+    width: 100% !important;
+    }
+
+.itpContainer ul {
+  width: 550px;
+  width: -moz-fit-content;
+}
+
+ .nav-pills .nav-link.active {
+  background-color: #28bfc7;
+}
+
+.btn-primary {
+  background-color: #28bfc7;
+  border-color: #28bfc7;
+}
+
+.mat-dialog-container {
+  height: auto !important;
+}
+/* override bootstrap end */
+
+/*============= MEDIA QUERY======= */
+
+/* @media only screen and (max-height: 800px) and (max-width: 1350px) */
+
+@media screen and (max-height: 700px) {
+  .pageAside {
+    position: absolute !important;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .mat-dialog-container {
+    max-height: 500px !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .pageAside {
+    position: absolute !important;
+  }
+}
+
+/*============= MEDIA QUERY end======= */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  pointer-events: none;
+}
+/* high-performance display:none; helper */
+.gu-hide {
+  left: -9999px !important;
+}
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+
+
+/* IE 11*/
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  .error-message {
+    margin-bottom: 0px !important;
+    display:ruby-text-container !important; 
+}
+select::-ms-expand { display: none; }
+
+.mat-dialog-container .form-control{
+  margin-bottom: 0px !important;
+}
+.form-group label{
+  margin-top: 5px;
+}
+.viewSetBtnNew{
+  margin-top: -63px;
+}
+
+.alignBtn{
+  margin-top: -63px;
+}
+.createTrial label {
+  margin-top: 1rem !important;
+}
+select{
+  margin-bottom: 0px !important;
+}
+.dialogButton{
+  margin-top: 20px;
+}
+
+.tableButton{
+  margin-top: 20px;
+}
+.search-field{
+  padding: 9px 9px;
+}
+.search-field::placeholder{
+  margin-top: 0px;
+}
+
+.createTrial .mat-checkbox-inner-container-no-side-margin {
+margin-top: -12px !important;
+}
+.cards .row{
+  flex-wrap: nowrap !important;
+}
+
+::-ms-clear { display: none; }
+
+input[type=text]:focus
+{
+    border: none;
+   margin-bottom: 0px !important;
+    outline: none;
+    line-height: 0px !important;
+}
+
+.mat-dialog-container .fileUploadTextShort{
+  margin-left: -90% !important;
+}
+}
+/* Safari*/
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .search-field::placeholder{
+    margin-top: 4px;
+  }
+
+
+.tableButton{
+  margin-top: 20px;
+}
+  } 
+
+
+/* FireFox*/
+select:-moz-focusring {
+  color: transparent !important;
+  text-shadow: 0 0 0 #000;
+}
+
+@-moz-document url-prefix() {
+ .cards .row{
+   flex-wrap: nowrap !important;
+ }
+
+ .tableButton{
+  margin-top: 20px;
+}
+}  
+
+
+
+/* Microsoft Edge */
+@supports (-ms-ime-align: auto) {
+  .tableButton{
+    margin-top: 20px;
+  }
+}

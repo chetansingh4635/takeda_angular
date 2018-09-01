@@ -1,0 +1,70 @@
+<div class="container-fluid cm-doc">
+    <div class="row dashboardTop">
+      <div class="cm_filter">
+        <h4 class="welcomeUser"> Hi {{user}}! Welcome back to your Dashboard </h4>
+      </div>
+  
+      <div class="col">
+        <div class="text-right">
+          <div class="search">
+            <div class="form-group">
+                <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter" />
+              <span class="align-icon">
+                <img class="" src="./assets/img/icons/search.svg" alt="search">
+              </span>
+            </div>
+          </div>
+          <button *ngIf="roleID === constants.adminId" (click)="addTrial('','add')" class="btn btn-primary viewSetBtnNew">Add New Trial</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="dashboardCards">
+      <div class="cards"  >
+        <div class="cardContainer row" id ="cardContainer" >
+          <div class=" completeTrialCard" *ngFor="let card of trialList; let i = index;">
+
+          <div class= "cardTop" [ngClass]="{'cardTopEven': (i % 2 === 1), 'cardTopOdd': (i % 2 === 0) }"> {{card.trialName}}</div>
+          <mat-card class="cardContent">
+            <mat-card-header>
+              <mat-card-title>{{card.trialTitle}}</mat-card-title>
+              <mat-card-subtitle>{{card.trialProtocolNumber}}</mat-card-subtitle>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+              <div class="trialContainer">
+                <div class="trialContent">
+                  <p class="trialNum"> {{card.croCount}}</p>
+                    
+                    <span class="trialUsers"> CRO </span>
+                </div>
+                <div class="trialContent">
+                  <p class="trialNum"> {{card.piCount}}</p>
+                    
+                    <span class="trialUsers"> PI </span>
+                  </div>
+                <div class="trialContent">
+                  <p class="trialNum"> {{card.sponsorCount}}</p>
+                    
+                    <span class="trialUsers"> Sponsor </span>
+                  
+                </div>
+              </div>
+  
+              <hr>
+              <div class="cardBtnContainer">
+                <button *ngIf = "roleID === constants.superAdminId || roleID === constants.adminId || roleID === constants.croId || roleID === constants.piId || roleID === constants.sitesId" class="btn btn-info" (click)="card.status === 'active' ? OnClickSectionbtn('userManagement', card) :  OnClickSectionbtnInactive()"> User Management </button>
+                <button  *ngIf = "roleID === constants.adminId"  class="btn btn-info" (click)="card.status === 'active' ? OnClickSectionbtn('trialManagement', card) : OnClickSectionbtnInactive()"> View Trial  </button>
+                <!-- <button *ngIf = "roleID === constants.sponsorId ||roleID === constants.adminId || roleID === constants.croId || roleID === constants.piId || roleID === constants.sitesId" class="btn btn-info" (click)="card.status === 'active' ? OnClickSectionbtn('contentManagement', card) : OnClickSectionbtnInactive()"> Content Management  </button> -->
+      
+              </div>
+            </mat-card-content>
+  
+          </mat-card>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+  </div>
